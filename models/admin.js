@@ -14,9 +14,9 @@ const adminSchema = new mongoose.Schema
     email : 
     {
         type: String,
-		required: true,
-		unique: true,
-		match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+	required: true,
+	unique: true,
+	match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
     },
 
     password :
