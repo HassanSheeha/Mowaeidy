@@ -51,3 +51,46 @@
 // admin
 // websitfe ino
 // blog
+//=====================================================================
+//send notification to organiser
+// reservedByUser: {
+// 	type: Boolean,
+// 	required: true,
+// 	default: true,
+// },
+//send notification to user
+// confirmedByOrganizer: {
+// 	type: Boolean,
+// 	required: true,
+// 	default: false,
+// },
+//send notification to organiser [and interested users if existed]
+// canceledByUser: {
+// 	type: Boolean,
+// 	required: true,
+// 	default: false,
+// },
+//send notification to user
+// canceledByOrganizer: {
+// 	type: Boolean,
+// 	required: true,
+// 	default: false,
+// },
+//2hours pre-appDateTime
+// reminderNotification: {
+// 	type: Date,
+// 	required: true,
+// 	default: new Date()
+// },
+//12hours post-appDateTime
+// FeedbackNotification: {
+// 	type: Date,
+// 	required: true,
+// 	default: new Date()
+// },
+//=====================================================================
+// sending emails to user and organizer before 2hours from the meeting
+// sending emails to user and organizer after 12hours from the meeting for feedback
+// sending emails to user and organizer in case of cancelation
+// sending emails to user in case of aproval
+// sending emails to organizer in case of creation(pending)
