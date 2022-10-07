@@ -3,8 +3,21 @@ const mongoose = require("mongoose");
 const webInfoSchema = new mongoose.Schema({
 	aboutUs: { type: String },
 	contactPhones: { type: Array },
-	//could be object or array
-	prices: { type: Array, required: true, minlength: 5 },
+	//object for two features
+	prices: {
+		free: {
+			featureOne: { type: String, required: true },
+			featureTwo: { type: String, required: true },
+			featureThree: { type: String, required: true },
+			price: { type: String, required: true },
+		},
+		premium: {
+			featureOne: { type: String, required: true },
+			featureTwo: { type: String, required: true },
+			featureThree: { type: String, required: true },
+			price: { type: String, required: true },
+		},
+	},
 	//needs more links
 	socialMediaLinks: {
 		facebook: { type: String },
