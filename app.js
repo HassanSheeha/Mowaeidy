@@ -3,6 +3,8 @@ require("./config/database").connect();
 const express = require("express");
 const app = express();
 
+const userRoute = require("./routes/UserRoute");
+
 app.use(express.json());
 
 // const jwt = require("jsonwebtoken");
@@ -14,5 +16,7 @@ app.use(express.json());
 
 // Allmodels
 // const UserModel = require("./model/user");
+
+app.use("/user", userRoute);
 
 module.exports = app;

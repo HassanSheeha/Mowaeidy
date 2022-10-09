@@ -94,3 +94,5 @@
 // sending emails to user and organizer in case of cancelation
 // sending emails to user in case of aproval
 // sending emails to organizer in case of creation(pending)
+//=====================================================================
+// make errors middlewhares
