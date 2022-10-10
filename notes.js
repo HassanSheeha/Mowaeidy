@@ -96,3 +96,13 @@
 // sending emails to organizer in case of creation(pending)
 //=====================================================================
 // make errors middlewhares
+//=====================================================================
+// listOrganizers = function (res) {
+// 	const user = new userModel();
+// 	userModel.find({ "user.organizer": true }, (err, data) => {
+// 		if (!err) {
+// 			return res.json(data);
+// 		}
+// 		res.status(500).json({ errMsg: "error in listing users" });
+// 	});
+// };

@@ -3,11 +3,16 @@ const express = require("express");
 const userRouter = express.Router();
 const users = new Usercontroller();
 
+// getting one user
 userRouter.get("/", (req, res) => {
-	users.hi();
+	const userdata = req.query.id;
+	users.listOne(userdata, res);
 });
+
+// adding new user
 userRouter.post("/", (req, res) => {
-	users.hi();
+	const userdata = req.body;
+	users.add(userdata, res);
 });
 userRouter.patch("/", (req, res) => {
 	users.hi();
