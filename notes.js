@@ -106,3 +106,5 @@
 // 		res.status(500).json({ errMsg: "error in listing users" });
 // 	});
 // };
+//=====================================================================
+// make the sign up two stages
