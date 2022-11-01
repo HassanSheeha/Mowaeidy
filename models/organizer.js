@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 
 const organizerSchema = new mongoose.Schema({
 	//foreign key for user collection
-	userEmailFK: {
-		type: String,
-		required: true,
-	},
+	userIDFK: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 
 	orgName: {
 		type: String,
@@ -34,10 +31,7 @@ const organizerSchema = new mongoose.Schema({
 		required: true,
 	},
 	//foreign key for industry collection
-	industryIDFK: {
-		type: String,
-		required: true,
-	},
+	industryIDFK: { type: mongoose.Schema.Types.ObjectId, ref: "industry" },
 	//the available days for the orginizer
 	availDays: {
 		type: Array,

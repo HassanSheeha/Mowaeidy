@@ -1,24 +1,31 @@
-const Usercontroller = require("../controllers/UserController");
 const express = require("express");
+const { deleteAppointment } = require("../controllers/AppointmentControllers");
+const { getOneOrganizerToView } = require("../controllers/OrganizerControllers");
+const {
+	addUser,
+	getOneUser,
+	editUser,
+	getAllAppointmentUser,
+} = require("../controllers/UserControllers");
 const userRouter = express.Router();
-const users = new Usercontroller();
 
-// getting one user
-userRouter.get("/", (req, res) => {
-	const userdata = req.query.id;
-	users.listOne(userdata, res);
-});
+// getting one user (personal page)
+userRouter.get("/me", getOneUser);
+
+// editing a user
+userRouter.put("/me/edit", editUser);
+
+// deleting an appointment
+userRouter.delete("/appointments/delete", deleteAppointment);
+
+// getting an appointment
+userRouter.get("/appointments", getAllAppointmentUser);
+
+// getting an organizer
+userRouter.get("/organzier", getOneOrganizerToView);
 
 // adding new user
-userRouter.post("/", (req, res) => {
-	const userdata = req.body;
-	users.add(userdata, res);
-});
-userRouter.patch("/", (req, res) => {
-	users.hi();
-});
-userRouter.delete("/", (req, res) => {
-	users.hi();
-});
+// expermental
+userRouter.post("/", addUser);
 
 module.exports = userRouter;

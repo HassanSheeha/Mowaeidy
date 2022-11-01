@@ -4,6 +4,9 @@ const express = require("express");
 const app = express();
 
 const userRoute = require("./routes/UserRoute");
+const organizerRoute = require("./routes/OrganizerRoute");
+const searchRouter = require("./routes/pagesRoutes/SearchRoutes");
+const dashboardRouter = require("./routes/pagesRoutes/DashboardRoutes");
 
 app.use(express.json());
 
@@ -18,5 +21,8 @@ app.use(express.json());
 // const UserModel = require("./model/user");
 
 app.use("/user", userRoute);
+app.use("/organizer", organizerRoute);
+app.use("/industries", searchRouter);
+app.use("/dashboard", dashboardRouter);
 
 module.exports = app;

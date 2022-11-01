@@ -28,7 +28,6 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		minlength: 8,
 	},
-	token: { type: String },
 	phone: {
 		type: String,
 		required: true,
@@ -39,8 +38,7 @@ const userSchema = new mongoose.Schema({
 		required: true,
 	},
 	profilePicture: {
-		data: Buffer,
-		contentType: String,
+		type: String,
 	},
 	id: {
 		type: String, //name#54812
@@ -63,6 +61,7 @@ const userSchema = new mongoose.Schema({
 		default: 0,
 		min: 0,
 	},
+	status: { type: String, default: "active" },
 });
 
 const UserModel = mongoose.model("user", userSchema);

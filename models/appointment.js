@@ -2,15 +2,9 @@ const mongoose = require("mongoose");
 
 const appointmentSchema = new mongoose.Schema({
 	//foreign key for user collection
-	madeByFK: {
-		type: String,
-		required: true,
-	},
+	madeByFK: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 	//foreign key for organiser collection
-	madeToFK: {
-		type: String,
-		required: true,
-	},
+	madeToFK: { type: mongoose.Schema.Types.ObjectId, ref: "organizer" },
 	//starts on
 	appDateTime: {
 		type: Date,
@@ -72,7 +66,7 @@ const appointmentSchema = new mongoose.Schema({
 		default: false,
 	},
 	//amount of daposit paid to organiser for appointing meeting [if required]
-	deposit_paid: {
+	depositPaid: {
 		type: Number,
 		default: 0,
 		min: 0,
@@ -83,10 +77,7 @@ const appointmentSchema = new mongoose.Schema({
 		default: null,
 	},
 	//foreign key for industry collection
-	industryIDFK: {
-		type: String,
-		required: true,
-	},
+	industryIDFK: { type: mongoose.Schema.Types.ObjectId, ref: "industry" },
 });
 
 const AppointmentModel = mongoose.model("appointments", appointmentSchema);
