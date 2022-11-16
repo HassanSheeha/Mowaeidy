@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const webInfoSchema = new mongoose.Schema({
 	aboutUs: { type: String },
-	contactPhones: { type: Array },
+	contactPhones: { type: String },
 	//object for two features
 	prices: {
 		free: {
@@ -23,12 +23,6 @@ const webInfoSchema = new mongoose.Schema({
 		facebook: { type: String },
 		linkedin: { type: String },
 		email: { type: String },
-	},
-	blog: {
-		blogHeader: { type: String },
-		blogBody: { type: String },
-		blogPicture: { type: String },
-		blogDate: { type: Date },
 	},
 });
 

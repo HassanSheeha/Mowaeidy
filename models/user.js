@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-
+const bcrypt = require("bcrypt");
+const { string } = require("joi/lib");
 const userSchema = new mongoose.Schema({
 	firstName: {
 		type: String,
@@ -39,16 +40,17 @@ const userSchema = new mongoose.Schema({
 	},
 	profilePicture: {
 		type: String,
+		default:
+			"https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg",
 	},
-	id: {
-		type: String, //name#54812
-		required: true,
-		unique: true,
-	},
+
 	organizer: {
 		required: true,
-		default: false,
 		type: Boolean,
+	},
+	role: {
+		type: String,
+		default: "user",
 	},
 	commited: {
 		type: Number,
@@ -62,6 +64,15 @@ const userSchema = new mongoose.Schema({
 		min: 0,
 	},
 	status: { type: String, default: "active" },
+});
+
+userSchema.pre("save", async function (next) {
+	this.password = await bcrypt.hash(
+		this.password,
+		parseInt(process.env.SALTROUND)
+	);
+
+	next();
 });
 
 const UserModel = mongoose.model("user", userSchema);

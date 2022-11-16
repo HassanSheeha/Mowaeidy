@@ -22,10 +22,9 @@ const getOneOrganizerToView = async (req, res) => {
 	try {
 		const foundOrganizer = await organzierModel
 			.findOne({ _id: req.query.id })
-			.select("-question -contact -numbOfAppointments -totalPaidMoney")
-			.populate({ path: "userIDFK", select: "email" })
-			.populate({ path: "industryIDFK", select: "name" })
-			.exec();
+			.select("-contact -numbOfAppointments -totalPaidMoney")
+			.populate({ path: "userIDFK", select: "email profilePicture" })
+			.populate({ path: "industryIDFK", select: "name canclationTime" });
 		if (!foundOrganizer) {
 			res.json({ message: "organizer doesn't exist" });
 		} else {
@@ -40,7 +39,7 @@ const getOneOrganizerToView = async (req, res) => {
 const editOrganizer = async (req, res) => {
 	try {
 		const updatedOrganizer = await organzierModel
-			.findOneAndUpdate({ userEmailFK: req.query.email }, req.body)
+			.findOneAndUpdate({ _id: req.query.id }, req.body)
 			.exec();
 		updatedOrganizer
 			? res.json({ message: "user updated" })
@@ -55,8 +54,9 @@ const getAllOrganizersSearch = async (req, res) => {
 	// try {
 	const foundOrganizer = await organzierModel
 		.find({})
-		.select("orgname title rating")
-		.populate({ path: "industryIDFK", select: "name" });
+		.select("orgName title rating rate numbOfAppointments")
+		.populate({ path: "industryIDFK", select: "name" })
+		.populate({ path: "userIDFK", select: "profilePicture" });
 	if (!foundOrganizer) {
 		res.json({ message: "organizer doesn't exist" });
 	} else {
@@ -90,7 +90,7 @@ const editAppointmentStatus = async (req, res) => {
 	}
 };
 
-// getting an appointment in organizer page
+// getting all appointment in organizer page
 const getAllAppointmentOrganizer = async (req, res) => {
 	try {
 		const foundAppointment = await appointmentModel
@@ -100,7 +100,23 @@ const getAllAppointmentOrganizer = async (req, res) => {
 			.populate({ path: "industryIDFK", select: "name" })
 			.exec();
 		if (!foundAppointment) {
-			res.json({ message: "organizer doesn't exist" });
+			res.json({ message: "appointments doesn't exist" });
+		} else {
+			res.json(foundAppointment);
+		}
+	} catch (err) {
+		res.json({ message: "error" });
+	}
+};
+// getting all appointment in organizer view page
+const getAllAppointmentOrganizerView = async (req, res) => {
+	try {
+		const foundAppointment = await appointmentModel
+			.find({ madeToFK: req.query.id })
+			.select("appStartDateTime appEndDateTime appID")
+			.exec();
+		if (!foundAppointment) {
+			res.json({ message: "appointments doesn't exist" });
 		} else {
 			res.json(foundAppointment);
 		}
@@ -145,4 +161,5 @@ module.exports = {
 	getOneOrganizerToView,
 	editAppointmentStatus,
 	getAllAppointmentOrganizer,
+	getAllAppointmentOrganizerView,
 };

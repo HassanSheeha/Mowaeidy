@@ -11,6 +11,19 @@ const getAlladmins = async (req, res) => {
 	}
 };
 
+// getting one admin in dashboard page
+const getOneAdmins = async (req, res) => {
+	// try {
+	const foundAdmins = await adminModel
+		.findOne({ email: req.query.email })
+		.select("-password");
+	if (!foundAdmins) {
+		res.json({ message: "there are no admins" });
+	} else {
+		res.json(foundAdmins);
+	}
+};
+
 // adding an admin in dashboard page
 const addAdmin = async (req, res) => {
 	try {
@@ -38,6 +51,7 @@ const deleteAdmin = async (req, res) => {
 
 module.exports = {
 	getAlladmins,
+	getOneAdmins,
 	addAdmin,
 	deleteAdmin,
 };

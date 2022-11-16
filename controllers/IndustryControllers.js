@@ -17,9 +17,25 @@ const getAllIndustriesDashboard = async (req, res) => {
 	// try {
 	const foundIndustries = await industryModel.find({});
 	if (!foundIndustries) {
-		res.json({ message: "organizer doesn't exist" });
+		res.json({ message: "industry doesn't exist" });
 	} else {
 		res.json(foundIndustries);
+	}
+};
+
+// getting an industry in adminpanel
+const getOneIndustry = async (req, res) => {
+	try {
+		const foundIndustry = await industryModel
+			.findOne({ _id: req.query.id })
+			.exec();
+		if (!foundIndustry) {
+			res.json({ message: "industry doesn't exist" });
+		} else {
+			res.json(foundIndustry);
+		}
+	} catch (err) {
+		res.json({ message: "error with one" });
 	}
 };
 
@@ -30,7 +46,7 @@ const addIndustry = async (req, res) => {
 		const savedIndusrty = await newIndustry.save();
 		res.json({ message: "done", savedIndusrty });
 	} catch (err) {
-		res.json({ message: "error" });
+		res.json({ message: "error", err });
 	}
 };
 
@@ -65,6 +81,7 @@ const deleteIndustry = async (req, res) => {
 module.exports = {
 	getAllIndustriesSearch,
 	getAllIndustriesDashboard,
+	getOneIndustry,
 	addIndustry,
 	editIndustry,
 	deleteIndustry,

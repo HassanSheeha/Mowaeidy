@@ -6,7 +6,12 @@ const appointmentSchema = new mongoose.Schema({
 	//foreign key for organiser collection
 	madeToFK: { type: mongoose.Schema.Types.ObjectId, ref: "organizer" },
 	//starts on
-	appDateTime: {
+	appStartDateTime: {
+		type: Date,
+		required: true,
+	},
+	//ends on
+	appEndDateTime: {
 		type: Date,
 		required: true,
 	},
@@ -22,13 +27,7 @@ const appointmentSchema = new mongoose.Schema({
 		default: null,
 		maxlength: 300,
 	},
-	// appointment duration defined by user
-	duration: {
-		type: Number,
-		required: true,
-		default: 1, // one half an hour
-		min: 1,
-	},
+	
 	// (pending-confirmed-done-canceled)
 	status: {
 		type: String,

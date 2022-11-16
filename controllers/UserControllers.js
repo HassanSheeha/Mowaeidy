@@ -1,7 +1,7 @@
 const AppointmentModel = require("../models/appointment");
 const userModel = require("../models/user");
 
-// getting one user (personal page)
+// getting one user (personal page & adminpanel)
 const getOneUser = async (req, res) => {
 	try {
 		const foundUser = await userModel

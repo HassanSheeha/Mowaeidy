@@ -19,7 +19,7 @@ const organizerSchema = new mongoose.Schema({
 	description: {
 		type: String,
 		default: null,
-		maxlength: 300,
+		maxlength: 400,
 	},
 	contact: {
 		type: Array,
@@ -37,12 +37,12 @@ const organizerSchema = new mongoose.Schema({
 		type: Array,
 		required: true,
 		maxItems: 7,
+		//[0,1,2]
 	},
 	//the available hours for the orginizer
 	availHours: {
-		type: Array,
-		required: true,
-		maxItems: 48,
+		startTime: { type: String },//10:00
+		endTime: { type: String },//16:00
 	},
 	//is the amount of required daposit
 	amountOfRequiredDaposit: {

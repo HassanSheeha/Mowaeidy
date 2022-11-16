@@ -18,7 +18,7 @@ const industrySchema = new mongoose.Schema({
 	},
 	allowPayment: {
 		type: Boolean,
-		required: true,
+		default: false,
 	},
 });
 

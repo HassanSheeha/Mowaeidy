@@ -9,6 +9,8 @@ const {
 	addAppointmentOrganizer,
 	editAppointmentStatus,
 	getAllAppointmentOrganizer,
+	getAllOrganizersSearch,
+	getAllAppointmentOrganizerView,
 } = require("../controllers/OrganizerControllers");
 const express = require("express");
 const { deleteAppointment } = require("../controllers/AppointmentControllers");
@@ -18,7 +20,7 @@ const organizerRouter = express.Router();
 organizerRouter.get("/me", getOneOrganizer);
 
 // getting one organizer (view page)
-organizerRouter.get("/", getOneOrganizerToView);
+organizerRouter.get("/view", getOneOrganizerToView);
 
 // editing an organizer
 organizerRouter.put("/me/edit", editOrganizer);
@@ -32,8 +34,14 @@ organizerRouter.put("/appointments/edit", editAppointmentStatus);
 // deleting an appointment
 organizerRouter.delete("/appointments/delete", deleteAppointment);
 
-// getting an appointment
+// getting all appointments in personal Page
 organizerRouter.get("/appointments", getAllAppointmentOrganizer);
+
+// getting all appointments in view Page
+organizerRouter.get("/appointments/view", getAllAppointmentOrganizerView);
+
+// getting all organizer in search in industries page
+organizerRouter.get("/search", getAllOrganizersSearch);
 
 // getting all organizer
 // expermental

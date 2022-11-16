@@ -7,7 +7,7 @@ const userRoute = require("./routes/UserRoute");
 const organizerRoute = require("./routes/OrganizerRoute");
 const searchRouter = require("./routes/pagesRoutes/SearchRoutes");
 const dashboardRouter = require("./routes/pagesRoutes/DashboardRoutes");
-
+const authRouter = require("./routes/authenticationRouter");
 app.use(express.json());
 
 // const jwt = require("jsonwebtoken");
@@ -23,6 +23,7 @@ app.use(express.json());
 app.use("/user", userRoute);
 app.use("/organizer", organizerRoute);
 app.use("/industries", searchRouter);
-app.use("/dashboard", dashboardRouter);
+app.use("/adminpanel", dashboardRouter);
+app.use("/user", authRouter);
 
 module.exports = app;
