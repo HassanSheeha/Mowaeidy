@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
 	phone: {
 		type: String,
 		required: true,
-		match: /^[0-9]{11}$/g,
+		match: /^01[0-2,5]{1}[0-9]{8}$/,
 	},
 	city: {
 		type: String,

@@ -1,6 +1,5 @@
 import React from "react";
 import Hero from "../components/Hero";
-import Blog from "../components/Blog";
 import Content from "../components/Content";
 import Reminder from "../components/Reminder";
 import Coming from "../components/Coming";
@@ -10,16 +9,16 @@ import Availability from "../components/Availability";
 import Appointment from "../components/Appointment";
 import Industry from "../components/Industry";
 import Img from "../components/Img";
-import About from "../components/About";
-import Teams from "../components/Teams";
 import Subscribe from "../components/Subscribe";
+import Features from "../components/Features";
+import MainBlog from "../components/MainBlog";
 
 export default function HomePage() {
 	return (
 		<>
 			<Hero></Hero>
 			<br></br>
-			<Blog></Blog>
+			<Features></Features>
 			<br></br>
 			<Content></Content>
 			<br></br>
@@ -40,14 +39,11 @@ export default function HomePage() {
 			<br></br>
 			<Img></Img>
 			<br></br>
-			<Teams></Teams>
+			<MainBlog></MainBlog>
 			<br></br>
 			<Img></Img>
 			<br></br>
 			<Subscribe></Subscribe>
-			<br></br>
-			<About></About>
-			<br></br>
 		</>
 	);
 }

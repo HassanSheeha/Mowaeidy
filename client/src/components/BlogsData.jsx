@@ -74,13 +74,19 @@ export default function BlogsData() {
 					{blogs &&
 						blogs.map((blog, index) => {
 							return (
-								<tr key={index}>
+								<tr key={index} className="">
 									<td>{blog?.blogHeader}</td>
-									<td className="text-break w-25">{blog?.blogBody}</td>
+									<td >{blog?.blogBody?.slice(0, 200)}</td>
 									<td>
 										{blog?.blogDate.slice(0, blog?.blogDate.indexOf("T"))}
 									</td>
-									<td>{blog?.blogPicture}</td>
+									<td>
+										<img
+											src={blog?.blogPicture}
+											alt="badLink"
+											className="table-img"
+										/>
+									</td>
 									<td>
 										<button
 											className="btn border-0 p-0"

@@ -4,6 +4,7 @@ import { getOneOrganizerView } from "../store/reducer/orgSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation, Outlet } from "react-router-dom";
 import OrgViewCalneder from "./OrgViewCalneder";
+import OrgPersonalCalender from "./OrgPersonalCalender";
 
 export default function OrganizerView() {
 	const { organizer, isLoading, error } = useSelector(
@@ -24,7 +25,7 @@ export default function OrganizerView() {
 		<div className="bg-light p-5 text-dark">
 			{!error && (
 				<div className="container border rounded-5 border-2 border-dark">
-					<div className="row p-3 d-flex w-100 justify-content-between">
+					<div className="row p-3 d-flex flex-md-row flex-column w-100 justify-content-between">
 						<div className="col-lg-3 col-md-6 col-8">
 							<img
 								src={organizer?.userIDFK?.profilePicture}
@@ -102,7 +103,8 @@ export default function OrganizerView() {
 
 						<div className="col-md-8 col-12">
 							<h4 className="my-3 text-dark">Calender</h4>
-							<OrgViewCalneder organizer={organizer} />
+							{/* <OrgViewCalneder organizer={organizer} /> */}
+							<OrgPersonalCalender organizer={organizer} />
 						</div>
 					</div>
 				</div>

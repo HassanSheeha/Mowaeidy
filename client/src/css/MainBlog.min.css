@@ -1,0 +1,7 @@
+.bord
+{
+    margin: 200px 340px;
+    border-radius: 60px 0px;
+    background-color: rgb(211, 211, 211);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}

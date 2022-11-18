@@ -1,3 +1,27 @@
+.hero {
+	height: 91vh;
+	background-color: var(--bs-primary);
+	width: 100%;
+}
+.hero img {
+	/* max-height: 91vh; */
+	width: 100%;
+}
+.imgOne {
+	background-image: url("/public/Assets/Images/1.jpg");
+}
+.imgTwo {
+	background-image: url("/public/Assets/Images/3.jpg");
+}
+.imgThree {
+	background-image: url("/public/Assets/Images/4.jpg");
+}
+.imgOne,
+.imgTwo,
+.imgThree {
+	height: 91vh;
+	background-size: cover;
+}
 .Carousel.Item {
 	height: 100vh;
 	min-height: 300px;

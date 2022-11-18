@@ -49,7 +49,7 @@ let editBlog = (blogId, blog) =>
 
 //info
 let editInfo = (InfoId, info) =>
-	axios.patch(`${baseUrl}/info/edit?id=${InfoId}`, info);
+	axios.put(`${baseUrl}/info/edit?id=${InfoId}`, info);
 
 export const adminsAPI = {
 	getAdmins,

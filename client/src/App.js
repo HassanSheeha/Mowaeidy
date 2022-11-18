@@ -18,6 +18,10 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import OrganizerView from "./components/OrganizerView";
 import AddAppointment from "./components/AddAppointment";
+import BlogsPage from "./pages/BlogsPage";
+import AboutPage from "./pages/AboutPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import FooterTest from "./components/Test";
 
 function App() {
 	return (
@@ -52,8 +56,12 @@ function App() {
 					<Route path="info" element={<InfoData />} />
 					<Route path="info/edit" element={<EditInfo />} />
 				</Route>
+				<Route path="/about" element={<AboutPage />} />
+				<Route path="/blogs" element={<BlogsPage />} />
+				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 			<Footer />
+			<FooterTest />
 		</>
 	);
 }

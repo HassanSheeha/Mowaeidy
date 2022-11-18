@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { infoAPI } from "../API/AdminPanelApi";
 import { getinfo } from "../store/reducer/InfoSlice";
+import "../css/infoData.css";
 
 export default function EditInfo() {
 	const { editInfo } = infoAPI;
@@ -147,6 +148,23 @@ export default function EditInfo() {
 							...information.socialMediaLinks,
 							linkedin: e.target.value,
 						},
+					});
+				}
+				break;
+			case "aboutUs":
+				if (e.target.value.length < 20) {
+					setErr({
+						...err,
+						aboutUs: "about can't be less than 20 charactars",
+					});
+				} else {
+					setErr({
+						...err,
+						aboutUs: null,
+					});
+					setInformation({
+						...information,
+						[e.target.name]: e.target.value,
 					});
 				}
 				break;
@@ -339,9 +357,9 @@ export default function EditInfo() {
 		}
 	};
 	// functions to handle data
-  const setValues=()=>{
-    setInformation(infos[0])
-  }
+	const setValues = () => {
+		setInformation(infos[0]);
+	};
 	const edit = async () => {
 		try {
 			let res = await editInfo(information._id, information);
@@ -389,7 +407,7 @@ export default function EditInfo() {
 				</button>
 			</div>
 
-			<Form className="container mt-3 text-center  bg-secondary text-white py-3">
+			<Form className="container my-3 text-center edit-info-data py-5">
 				<Row className="align-items-center justify-content-center mb-3">
 					<Form.Label as={Col} sm="12" md="2" lg="1">
 						Phone
@@ -454,6 +472,7 @@ export default function EditInfo() {
 						)}
 					</Form.Group>
 				</Row>
+				<hr />
 				<Row className="align-items-center justify-content-center mb-3">
 					<Form.Group
 						as={Col}
@@ -466,14 +485,19 @@ export default function EditInfo() {
 						<Form.Control
 							onChange={changeHandler}
 							as="textarea"
+							rows={4}
 							type="text"
 							name="aboutUs"
 							placeholder="About us"
-							maxLength="300"
+							maxLength="500"
 							defaultValue={infos[0]?.aboutUs}
 						/>
+						{err.aboutUs && (
+							<Form.Text className="text-danger">{err.aboutUs}</Form.Text>
+						)}
 					</Form.Group>
 				</Row>
+				<hr />
 				<Row className="align-items-center justify-content-center mb-3">
 					<Form.Group as={Col} sm="12" md="6" lg="5" controlId="formGridFree">
 						<Form.Label>Free price</Form.Label>

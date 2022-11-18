@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 
 
-export default function Products() {
+export default function Features() {
   return (
     <>
     <div className='container '>

@@ -70,7 +70,7 @@ dashboardRouter.post("/info/add", addInfo);
 dashboardRouter.get("/info", getAllInfo);
 
 // editing info
-dashboardRouter.patch("/info/edit", editInfo);
+dashboardRouter.put("/info/edit", editInfo);
 
 // getting all blogs
 dashboardRouter.get("/blogs", getAllIBlogs);

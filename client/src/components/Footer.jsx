@@ -69,13 +69,13 @@ export default function Footer() {
 						</CDBBox>
 					</CDBBox>
 
-					<h5 className="text-center mt-5">
+					{/* <h5 className="text-center mt-5">
 						{" "}
 						<span className="text-warning" style={{ width: "100px" }}>
 							&copy;
 						</span>{" "}
 						Copy Right <span className="text-warning">Mowaeidy</span> 2022
-					</h5>
+					</h5> */}
 				</CDBBox>
 			</CDBFooter>
 		</div>

@@ -7,34 +7,13 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import momentPlugin from "@fullcalendar/moment";
 import { appointmentAPI } from "../API/AppointmentAPI";
 
-export default function OrgViewCalneder({ organizer }) {
+export default function OrgPersonalCalender({ organizer }) {
 	const { getDisapledAppointments } = appointmentAPI;
 	const navigate = useNavigate();
-	const [eventInfo, setEventInfo] = useState();
-	let now = new Date();
-	let availTime = new Date();
-	availTime = availTime.setMonth(now.getMonth() + 1);
-	
+	// const [eventInfo, setEventInfo] = useState();
+
 	// setting calender events
 	const [organizerEvents, setOrganizerEvents] = useState([]);
-	const [events, setEvents] = useState([
-		// denay access to previous times
-		{
-			start: new Date("1822-01-01"),
-			end: now,
-			title: "hassan",
-			display: "background",
-			backgroundColor: "gray",
-		},
-		// denay access to times after one month
-		{
-			start: availTime,
-			end: new Date("3022-01-01"),
-			title: "hassan",
-			display: "background",
-			backgroundColor: "gray",
-		},
-	]);
 
 	const businessHours = {
 		daysOfWeek: organizer?.availDays,
@@ -42,13 +21,23 @@ export default function OrgViewCalneder({ organizer }) {
 		endTime: organizer?.availHours?.endTime, // an end time
 		color: "green",
 	};
-
-	const addApp = (info) => {
-		if (!info.allDay && info.start > now && info.end < availTime) {
-			setEventInfo(info);
-			navigate("/organizers/view/addAppointment");
-		}
-	};
+	// const handleSelect = (info) => {
+	// 	console.log(info);
+	// 	const { start, end } = info;
+	// 	const eventNamePrompt = prompt("Enter, event name");
+	// 	if (eventNamePrompt) {
+	// 		setEvents([
+	// 			...events,
+	// 			{
+	// 				start,
+	// 				end,
+	// 				title: eventNamePrompt,
+	// 				id: uuid(),
+	// 			},
+	// 		]);
+	// 	}
+	// 	console.log(events);
+	// };
 	useEffect(() => {
 		getAppointments();
 		// eslint-disable-next-line
@@ -67,8 +56,8 @@ export default function OrgViewCalneder({ organizer }) {
 						{
 							start: oneApp?.appStartDateTime,
 							end: oneApp?.appEndDateTime,
-							display: "background",
-							backgroundColor: "red",
+							backgroundColor: "green",
+              title:"sheeha",
 							id: oneApp?.appID,
 						},
 					]);
@@ -87,22 +76,24 @@ export default function OrgViewCalneder({ organizer }) {
 					momentPlugin,
 				]}
 				firstDay="6" //starts with saturday
-				allDaySlot={false}
-				selectConstraint={"businessHours"}
-				selectOverlap={false}
+				allDaySlot={false} //to hide all day slot
+				dayMaxEventRows={true}
 				views={["dayGridMonth", "timeGridWeek", "timeGridDay"]} //the avail views
+				eventTimeFormat={{
+					hour: "numeric",
+					minute: "2-digit",
+					meridiem: "short",
+				}}
 				headerToolbar={{
 					start: "today prev next",
 					end: "dayGridMonth timeGridWeek timeGridDay",
 				}}
-				selectMirror={true} //placeholder
-				events={(events, organizerEvents)} //show events in calender
-				businessHours={businessHours}
-				selectable //enable select date
-				select={addApp} //selected date callback
+				events={organizerEvents} //show events in calender
+				businessHours={businessHours}//apply bussines hours
+				// eventClick={addApp}
 				// initialView={"timeGridFourDay"}
 			/>
-			<Outlet context={{ eventInfo, organizer }} />
+			{/* <Outlet context={{ eventInfo, organizer }} /> */}
 		</>
 	);
 }

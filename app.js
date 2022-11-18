@@ -8,6 +8,7 @@ const organizerRoute = require("./routes/OrganizerRoute");
 const searchRouter = require("./routes/pagesRoutes/SearchRoutes");
 const dashboardRouter = require("./routes/pagesRoutes/DashboardRoutes");
 const authRouter = require("./routes/authenticationRouter");
+const blogRouter = require("./routes/pagesRoutes/BlogsRoutes");
 app.use(express.json());
 
 // const jwt = require("jsonwebtoken");
@@ -24,6 +25,7 @@ app.use("/user", userRoute);
 app.use("/organizer", organizerRoute);
 app.use("/industries", searchRouter);
 app.use("/adminpanel", dashboardRouter);
+app.use("/blogs", blogRouter);
 app.use("/user", authRouter);
 
 module.exports = app;
