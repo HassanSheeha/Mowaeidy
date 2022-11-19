@@ -1,83 +1,107 @@
 import React from "react";
-import { CDBFooter, CDBFooterLink, CDBBox, CDBBtn, CDBIcon } from "cdbreact";
+import { NavLink } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { BiUser } from "react-icons/bi";
+import { FiFacebook, FiLinkedin } from "react-icons/fi";
+import { TbBrandGmail } from "react-icons/tb";
+
 export default function Footer() {
 	return (
-		<div>
-			<CDBFooter className="shadow bg-primary">
-				<CDBBox
-					display="flex"
-					flex="column"
-					className="mx-auto py-4"
-					style={{ width: "90%" }}
-				>
-					<CDBBox display="flex" justifyContent="between" className="flex-wrap">
-						<CDBBox>
-							<a href="/" className="d-flex align-items-center p-0 text-dark">
-								<img alt="logo" src="Assets/Images/2.png" width="150px" />
-							</a>
-							<p className="my-1 mt-2 text-white " style={{ width: "300px" }}>
-								We take the work out of connecting with others so you can
-								accomplish more.
-							</p>
-							<CDBBox display="flex" className="mt-4">
-								<CDBBtn flat color="primary">
-									<CDBIcon fab icon="facebook-f" />
-								</CDBBtn>
-								<CDBBtn flat color="danger" className="mx-3 ">
-									<CDBIcon fab icon="google" />
-								</CDBBtn>
-							</CDBBox>
-						</CDBBox>
-						<CDBBox>
-							<div
-								className="h5 mb-5 "
-								style={{ fontWeight: "600", textDecoration: "none" }}
-							></div>
-							<CDBBox flex="column" style={{ cursor: "pointer", padding: "0" }}>
-								<CDBFooterLink href="/">Home</CDBFooterLink>
-								<br></br>
-								<CDBFooterLink href="/">Industries</CDBFooterLink>
-								<br></br>
-								<CDBFooterLink href="/">Organizers</CDBFooterLink>
-								<br></br>
-								<CDBFooterLink href="/">Calender</CDBFooterLink>
-							</CDBBox>
-						</CDBBox>
-						<CDBBox>
-							<div className="h5 mb-5 " style={{ fontWeight: "600" }}></div>
-							<CDBBox flex="column" style={{ cursor: "pointer", padding: "0" }}>
-								<CDBFooterLink href="/">Contact</CDBFooterLink>
-								<br></br>
-								<CDBFooterLink href="/">About</CDBFooterLink>
-							</CDBBox>
-						</CDBBox>
-						<CDBBox>
-							<div
-								className="h5 mb-5 ms-5 me-5 mt-5"
-								style={{ fontWeight: "400" }}
-							>
+		<>
+			<div className="bg-primary text-light">
+				<footer className="container py-5">
+					<Container>
+						<Row>
+							<NavLink to="/home" className="px-2 mb-3">
+								<img alt="logo" src="Assets/Images/logo.png" width="150px" />
+							</NavLink>
+						</Row>
+						<Row>
+							<Col>
+								<p className="my-1  w-75 text-white ">
+									We take the work out of connecting with others so you can
+									accomplish more.
+								</p>
+								<FiFacebook />
+								<FiLinkedin />
+								<TbBrandGmail />
+							</Col>
+							<Col>
+								<ul className="nav flex-column text-warning">
+									<li className="mb-2">
+										<NavLink to="/home" className="p-0 ">
+											Home
+										</NavLink>
+									</li>
+									<li className="mb-2">
+										<NavLink to="/organizers" className="p-0">
+											Organizers
+										</NavLink>
+									</li>
+									<li className="mb-2">
+										<NavLink to="/calender" className=" p-0">
+											Calender
+										</NavLink>
+									</li>
+								</ul>
+							</Col>
+							<Col>
+								<ul className="nav flex-column text-warning">
+									<li className="mb-2">
+										<NavLink to="/about" className="p-0">
+											About
+										</NavLink>
+									</li>
+									<li className="mb-2">
+										<NavLink to="/contact" className="p-0">
+											Contact
+										</NavLink>
+									</li>
+									<li className="mb-2">
+										<NavLink to="/blogs" className="p-0">
+											Blogs
+										</NavLink>
+									</li>
+								</ul>
+							</Col>
+							<Col>
 								<BiUser />
 								<h5 className="text-warning mt-1  ">Profile</h5>
+								<button className="btn btn-warning" type="button">
+									Get Started
+								</button>
+							</Col>
+						</Row>
+						<Row>
+							<div className="d-flex flex-column flex-sm-row justify-content-center py-4 my-4 ">
+								<h5>
+									<span className="text-warning mx-2">&copy;</span>
+									Copy Right <span className="text-warning">Mowaeidy</span> 2022
+								</h5>
+								<ul className="list-unstyled d-flex">
+									<li className="ms-3">
+										<a className="link-dark" href="/home">
+											<svg className="bi" width="24" height="24"></svg>
+										</a>
+									</li>
+									<li className="ms-3">
+										<a className="link-dark" href="/home">
+											<svg className="bi" width="24" height="24"></svg>
+										</a>
+									</li>
+									<li className="ms-3">
+										<a className="link-dark" href="/home">
+											<svg className="bi" width="24" height="24"></svg>
+										</a>
+									</li>
+								</ul>
 							</div>
-							<button
-								className=" btn btn-warning text-white p-2 mt-5 ms-1 me-5 px-5"
-								style={{ marginLeft: "1px" }}
-							>
-								Get Started
-							</button>
-						</CDBBox>
-					</CDBBox>
-
-					{/* <h5 className="text-center mt-5">
-						{" "}
-						<span className="text-warning" style={{ width: "100px" }}>
-							&copy;
-						</span>{" "}
-						Copy Right <span className="text-warning">Mowaeidy</span> 2022
-					</h5> */}
-				</CDBBox>
-			</CDBFooter>
-		</div>
+						</Row>
+					</Container>
+				</footer>
+			</div>
+		</>
 	);
 }

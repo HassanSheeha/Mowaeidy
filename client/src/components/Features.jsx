@@ -1,95 +1,89 @@
-import React from 'react'
-import Card from 'react-bootstrap/Card';
-
+import React from "react";
+import { NavLink } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "../css/Features.css";
 
 export default function Features() {
-  return (
-    <>
-    <div className='container '>
-    <div className=" row mt-5 ms-3 ">
+	const features = [
+		{
+			image: "Assets/Images/6.png",
+			title: "Manage Customers",
+			body: "Manage Your Customer data. Their appointment history all in	one place",
+		},
+		{
+			image: "Assets/Images/8.png",
+			title: "Reminders",
+			body: "Avoid no-shows & missed appointments..",
+		},
+		{
+			image: "Assets/Images/7.png",
+			title: "Reviews",
+			body: "Get the right feedback from Customers..",
+			subTitle: "(COMING SOON)",
+		},
+		{
+			image: "Assets/Images/9.png",
+			title: "Take Payment",
+			body: "Support Cash and Card Payment right from your picktime calender..",
+			subTitle: "(COMING SOON)",
+		},
+		{
+			image: "Assets/Images/10.png",
+			title: "Book Widget",
+			body: "Turn your website into a booking engine..",
+			subTitle: "(COMING SOON)",
+		},
+		{
+			image: "Assets/Images/11.png",
+			title: "Multiple Locations",
+			body: "Check what is going on in all your bussiness locations at a glance..",
+		},
+	];
+	return (
+		<>
+			<Container>
+				<Row xs={1} md={2} lg={3}>
+					{features.map((ft) => {
+						return (
+							<Col className="mb-3">
+								<Card className="ft-card border-0">
+									<Card.Img
+										className="my-3 ft-card-img"
+										variant="top"
+										src={ft.image}
+									/>
+									<Card.Body className="d-flex flex-column justify-content-between">
+										<Card.Title className="text-primary text-bold">
+											<span className="border-2 pb-1 border-primary border-bottom">{ft.title}</span>
+										</Card.Title>
+										<Card.Text className="text-muted lead">{ft.body}</Card.Text>
+										<Card.Text className="text-primary fs-6">
+											{ft.subTitle}
+										</Card.Text>
+										<h5 className=" text-warning  text-end">
+											<NavLink to="/signUp">More</NavLink>
+										</h5>
+									</Card.Body>
+								</Card>
+							</Col>
+						);
+					})}
+				</Row>
+			</Container>
 
-      <div className="col-12 col-md-12 col-lg-4 mt-3 ">
-      <Card className= 'bg-light  text-bold pb-2'>
-      <Card.Img className="mt-5 ms-5 bg-light" style={{width:'8rem'}} variant="top" src="Assets/Images/6.png"  />
-      <Card.Body>
-        <Card.Title className="text-primary text-bold ms-3">Manage Customers</Card.Title>
-        <Card.Text className="text-muted  mt-4 ms-3">
-        Manage Your Customer data. Their appointment history all in one place.
-        </Card.Text>
-        <h5 className=" text-warning  text-end mt-5 me-5  ">More</h5>
-      </Card.Body>
-    </Card>
-    </div>
-
-    <div className='col-12 col-md-12 col-lg-4 mt-3 '>
-    <Card className= 'bg-primary  text-bold pb-2' >
-      <Card.Img className= " mt-3  mx-auto"  variant="top" style={{width:'8rem'}} src="Assets/Images/8.png" />
-      <Card.Body>
-        <Card.Title className="text-warning text-center text-bold mt-1 ">Reminders</Card.Title>
-        <Card.Text className="text-white text-center mt-4  ">
-          Avoid no-shows & missed appointments..
-        </Card.Text>
-        <h5 className="text-warning text-end me-5  mb-3">More</h5>
-      </Card.Body>
-    </Card>
-   </div>
-
-   <div className='col-12 col-md-12 col-lg-4 mt-3'>
-    <Card className= 'bg-light  text-bold pb-2'>
-      <Card.Img className="mt-3 ms-4 bg-light" variant="top" style={{width:'8rem'}} src="Assets/Images/7.png" />
-      <Card.Body>
-        <Card.Title className="text-primary ms-4 ">Reviews</Card.Title>
-        <Card.Text className="text-muted  mt-3 ms-4">
-        Get the right feedback from Customers..
-        </Card.Text>
-        <Card.Text className="text-primary ms-4 mt-2">
-        (COMING SOON)
-        </Card.Text>
-        <h5 className="text-warning text-end me-5   mt-2">More</h5>
-     
-        
-      </Card.Body>
-    </Card>
-
-    </div>
-    <div className='col-12 col-md-12 col-lg-4 mt-5'>
-    <Card className= 'bg-light text-bold  pb-2'>
-      <Card.Img className="mt-5 ms-5 bg-light" variant="top" style={{width:'8rem'}} src="Assets/Images/9.png" />
-      <Card.Body>
-        <Card.Title className="text-primary ms-4">Take Payment</Card.Title>
-        <Card.Text className="text-muted mt-3 ms-4">
-         Support Cash and Card Payment right from your picktime calender..
-        </Card.Text>
-        <h5 className="text-warning text-end me-5 mt-5  ">More</h5>
-      </Card.Body>
-    </Card>
-    </div>
-    <div className='col-12 col-md-12 col-lg-4 mt-5'>
-    <Card className= 'bg-light text-bold pb-2' >
-      <Card.Img  className="mt-5 ms-5 bg-light" variant="top" style={{width:'8rem'}} src="Assets/Images/10.png" />
-      <Card.Body>
-        <Card.Title className="text-primary ms-4 mt-1">Book Widget</Card.Title>
-        <Card.Text className="text-muted mt-4 ms-4 mt-1">
-       Turn your website into a booking engine..
-        </Card.Text>
-      </Card.Body>
-      <h5  className="text-warning  mx-3  mt-5  text-end me-5 " style={{textDecoration:'none'}}>More</h5>
-    </Card>
-    </div>
-    <div className='col-12 col-md-12 col-lg-4 mt-5'>
-    <Card className= 'bg-light text-bold  pb-2'>
-      <Card.Img className="mt-4 ms-5 bg-light" variant="top" style={{width:'8rem'}} src="Assets/Images/11.png" />
-      <Card.Body>
-        <Card.Title className="text-primary  ms-4">Multiple Locations</Card.Title>
-        <Card.Text className="text-muted  mt-3 ms-4">
-      Check what is going on in all your bussiness locations at a glance..
-        </Card.Text>
-      </Card.Body>
-      <h5  className="text-warning  mx-3  mt-4  text-end me-5 " style={{textDecoration:'none'}}>More</h5>
-    </Card>
-  </div>
-   </div>
-   </div>
-    </>
-  )
+			<div className="col-12 col-md-12 col-lg-4 mt-3 ">
+				<Card className="bg-primary  text-bold pb-2">
+					<Card.Img
+						className=" mt-3  mx-auto"
+						variant="top"
+						style={{ width: "8rem" }}
+						src="Assets/Images/8.png"
+					/>
+				</Card>
+			</div>
+		</>
+	);
 }

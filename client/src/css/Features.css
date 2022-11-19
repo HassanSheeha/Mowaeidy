@@ -1,0 +1,9 @@
+.ft-card {
+	min-height: 60vh;
+	box-shadow: 0px 4px 3px 1px rgb(145 145 145 / 35%);
+	border-radius: 20px;
+}
+.ft-card-img {
+	height: 100px;
+	object-fit: contain;
+}
