@@ -1,47 +1,38 @@
 import React from "react";
 import Hero from "../components/Hero";
-import Content from "../components/Content";
-import Reminder from "../components/Reminder";
-import Coming from "../components/Coming";
-import Schedule from "../components/Schedule";
-import Number from "../components/Number";
-import Availability from "../components/Availability";
-import Appointment from "../components/Appointment";
-import Industry from "../components/Industry";
-import Img from "../components/Img";
-import Subscribe from "../components/Subscribe";
 import Features from "../components/Features";
+import FtCustomer from "../components/FtCustomer";
+import FtReminder from "../components/FtReminder";
+import FtReviews from "../components/FtReviews";
+import FtSchedule from "../components/FtSchedule";
+import FtNumber from "../components/FtNumber";
+import FtAvailability from "../components/FtAvailability";
+import MainAppointment from "../components/MainAppointment";
+import Industry from "../components/Industry";
+import Subscribe from "../components/Subscribe";
 import MainBlog from "../components/MainBlog";
+import Devider from "../components/Devider";
 
 export default function HomePage() {
 	return (
 		<>
 			<Hero></Hero>
-			<br></br>
 			<Features></Features>
-			<br></br>
-			<Content></Content>
-			<br></br>
-			<Reminder></Reminder>
-			<br></br>
-			<Coming></Coming>
-			<br></br>
-			<Schedule></Schedule>
-			<br></br>
-			<Number></Number>
-			<br></br>
-			<Availability></Availability>
-			<br></br>
-			<br></br>
-			<Appointment></Appointment>
-			<br></br>
+			<FtCustomer></FtCustomer>
+			<FtReminder></FtReminder>
+			<FtReviews></FtReviews>
+			<FtSchedule></FtSchedule>
+			<FtNumber></FtNumber>
+			<FtAvailability></FtAvailability>
+			<MainAppointment></MainAppointment>
+			<MainBlog></MainBlog>
+			{/* not yet */}
 			<Industry></Industry>
 			<br></br>
-			<Img></Img>
+			<Devider></Devider>
 			<br></br>
-			<MainBlog></MainBlog>
 			<br></br>
-			<Img></Img>
+			<Devider></Devider>
 			<br></br>
 			<Subscribe></Subscribe>
 		</>

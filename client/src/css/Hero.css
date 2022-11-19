@@ -21,6 +21,7 @@
 .imgThree {
 	height: 91vh;
 	background-size: cover;
+	z-index: -4;
 }
 .Carousel.Item {
 	height: 100vh;
@@ -31,7 +32,7 @@
 }
 .Carousel.Caption {
 	bottom: 220px;
-	z-index: 2;
+	z-index: 5;
 }
 .Carousel.Caption h1 {
 	font-size: 45px;

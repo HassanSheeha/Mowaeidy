@@ -9,42 +9,42 @@ import "../css/Features.css";
 export default function Features() {
 	const features = [
 		{
-			image: "Assets/Images/6.png",
+			image: "Assets/Images/ftManage.svg",
 			title: "Manage Customers",
 			body: "Manage Your Customer data. Their appointment history all in	one place",
 		},
 		{
-			image: "Assets/Images/8.png",
+			image: "Assets/Images/ftReminders.svg",
 			title: "Reminders",
 			body: "Avoid no-shows & missed appointments..",
 		},
 		{
-			image: "Assets/Images/7.png",
+			image: "Assets/Images/ftReviews.svg",
 			title: "Reviews",
 			body: "Get the right feedback from Customers..",
 			subTitle: "(COMING SOON)",
 		},
 		{
-			image: "Assets/Images/9.png",
+			image: "Assets/Images/ftPayment.svg",
 			title: "Take Payment",
 			body: "Support Cash and Card Payment right from your picktime calender..",
 			subTitle: "(COMING SOON)",
 		},
 		{
-			image: "Assets/Images/10.png",
+			image: "Assets/Images/ftbook.svg",
 			title: "Book Widget",
 			body: "Turn your website into a booking engine..",
 			subTitle: "(COMING SOON)",
 		},
 		{
-			image: "Assets/Images/11.png",
+			image: "Assets/Images/ftLocation.svg",
 			title: "Multiple Locations",
 			body: "Check what is going on in all your bussiness locations at a glance..",
 		},
 	];
 	return (
 		<>
-			<Container>
+			<Container className="my-5 py-4">
 				<Row xs={1} md={2} lg={3}>
 					{features.map((ft) => {
 						return (
@@ -57,10 +57,14 @@ export default function Features() {
 									/>
 									<Card.Body className="d-flex flex-column justify-content-between">
 										<Card.Title className="text-primary text-bold">
-											<span className="border-2 pb-1 border-primary border-bottom">{ft.title}</span>
+											<span className="border-2 pb-1 ft-card-title border-primary border-bottom">
+												{ft.title}
+											</span>
 										</Card.Title>
-										<Card.Text className="text-muted lead">{ft.body}</Card.Text>
-										<Card.Text className="text-primary fs-6">
+										<Card.Text className="text-muted lead ft-card-body">
+											{ft.body}
+										</Card.Text>
+										<Card.Text className="text-primary fs-6 ft-card-sub">
 											{ft.subTitle}
 										</Card.Text>
 										<h5 className=" text-warning  text-end">
@@ -73,17 +77,6 @@ export default function Features() {
 					})}
 				</Row>
 			</Container>
-
-			<div className="col-12 col-md-12 col-lg-4 mt-3 ">
-				<Card className="bg-primary  text-bold pb-2">
-					<Card.Img
-						className=" mt-3  mx-auto"
-						variant="top"
-						style={{ width: "8rem" }}
-						src="Assets/Images/8.png"
-					/>
-				</Card>
-			</div>
 		</>
 	);
 }

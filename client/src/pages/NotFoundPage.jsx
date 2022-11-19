@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "../css/NotFoundPage.css";
 
 export default function NotFoundPage() {
@@ -16,9 +17,9 @@ export default function NotFoundPage() {
 					<span className="text-primary fw-bold fs-5  ">
 						please try again later ..
 					</span>
-					<a href="/home" className="btn ms-2 my-4 btn-outline-danger">
+					<NavLink to="/home" className="btn ms-2 my-4 btn-outline-danger">
 						Home
-					</a>
+					</NavLink>
 				</div>
 			</div>
 		</>

@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import "../css/Hero.css"
+import { NavLink } from "react-router-dom";
+import "../css/Hero.css";
 
 export default function Hero() {
 	return (
@@ -16,7 +17,9 @@ export default function Hero() {
 							reminders and follow-ups, and integrate everything with your
 							preferred software tools
 						</p>
-						<button className="btn btn-warning mt-3"> Get Started</button>
+						<NavLink to="/signUp" className="btn btn-warning">
+							Get Started
+						</NavLink>
 					</Carousel.Caption>
 				</Carousel.Item>
 				<Carousel.Item>
@@ -29,7 +32,9 @@ export default function Hero() {
 							reminders and follow-ups, and integrate everything with your
 							preferred software tools
 						</p>
-						<button className="btn btn-warning"> Get Started</button>
+						<NavLink to="/signUp" className="btn btn-warning">
+							Get Started
+						</NavLink>
 					</Carousel.Caption>
 				</Carousel.Item>
 				<Carousel.Item>
@@ -42,7 +47,9 @@ export default function Hero() {
 							reminders and follow-ups, and integrate everything with your
 							preferred software tools
 						</p>
-						<button className="btn btn-warning"> Get Started</button>
+						<NavLink to="/signUp" className="btn btn-warning">
+							Get Started
+						</NavLink>
 					</Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>

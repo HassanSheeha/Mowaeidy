@@ -30,7 +30,8 @@
 .nav-link {
 	color: white !important;
 }
-.navbar-nav .nav-link.active,.test {
+.navbar-nav .nav-link.active,
+.test {
 	background-color: var(--bs-warning);
 	border-top-right-radius: 20px;
 	border-bottom-left-radius: 20px;
@@ -44,6 +45,9 @@ a {
 		flex-direction: column;
 		flex-wrap: wrap;
 	}
+}
+.text-gray {
+	color: var(--bs-gray);
 }
 ::-webkit-scrollbar {
 	width: 10px;
