@@ -139,21 +139,10 @@ const getAllOrganizers = async (req, res) => {
 	}
 };
 
-// adding new organizer
-// expermental
-const addOrganizer = async (req, res) => {
-	try {
-		const newOrganizer = new organzierModel(req.body);
-		const savedOrganizer = await newOrganizer.save();
-		res.json({ message: "done", savedOrganizer });
-	} catch (err) {
-		res.json({ message: "error" });
-	}
-};
+
 
 module.exports = {
 	getOneOrganizer,
-	addOrganizer,
 	getAllOrganizers,
 	editOrganizer,
 	addAppointmentOrganizer,

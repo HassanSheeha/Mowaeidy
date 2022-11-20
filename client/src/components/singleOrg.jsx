@@ -14,7 +14,7 @@ export default function SingleOrg({ orgData }) {
 					{" "}
 					<img
 						alt="profile"
-						src={userIDFK.profilePicture}
+						src={userIDFK?.profilePicture}
 						width="80"
 						height="80"
 						className="rounded-circle shadow"

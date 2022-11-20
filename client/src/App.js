@@ -21,6 +21,9 @@ import BlogsPage from "./pages/BlogsPage";
 import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
+import RegisterUser from "./components/RegisterUser";
+import RegisterOrganizer from "./components/RegisterOrganizer";
 
 function App() {
 	return (
@@ -57,6 +60,10 @@ function App() {
 				</Route>
 				<Route path="/about" element={<AboutPage />} />
 				<Route path="/blogs" element={<BlogsPage />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signUp" element={<RegisterUser />} />
+				<Route path="/signUpOrganizer" element={<RegisterOrganizer />} />
+
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 			<Footer />

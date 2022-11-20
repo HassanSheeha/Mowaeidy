@@ -111,3 +111,31 @@
 //=====================================================================
 //add status to responses 
 //return res.status(500).json({ errMsg: "error in listing users" });
+//=====================================================================
+// userRouter.post("/", addUser);
+
+// adding new User
+// expermental
+// const addUser = async (req, res) => {
+// 	try {
+  // 		const newUser = new userModel(req.body);
+  // 		const savedUser = await newUser.save();
+// 		res.json({ message: "done", savedUser });
+// 	} catch (err) {
+// 		res.json({ message: "error" });
+// 	}
+// };
+  //=====================================================================
+// organizerRouter.post("/", addOrganizer);
+
+// adding new organizer
+// expermental
+// const addOrganizer = async (req, res) => {
+// 	try {
+// 		const newOrganizer = new organzierModel(req.body);
+// 		const savedOrganizer = await newOrganizer.save();
+// 		res.json({ message: "done", savedOrganizer });
+// 	} catch (err) {
+// 		res.json({ message: "error" });
+// 	}
+// };

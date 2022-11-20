@@ -38,7 +38,7 @@ export default function SideOrg({ orgData }) {
 				<Card.Img
 					variant="top"
 					className="shadow"
-					src={userIDFK.profilePicture}
+					src={userIDFK?.profilePicture}
 				/>
 				<Card.Body className="d-flex flex-column justify-content-between">
 					<Card.Title className="text-warning text-center">

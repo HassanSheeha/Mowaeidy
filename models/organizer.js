@@ -12,7 +12,7 @@ const organizerSchema = new mongoose.Schema({
 	},
 	title: {
 		type: String,
-		default: null,
+		required: true,
 		minlength: 4,
 		maxlength: 20,
 	},
@@ -22,8 +22,18 @@ const organizerSchema = new mongoose.Schema({
 		maxlength: 400,
 	},
 	contact: {
-		type: Array,
-		default: null,
+		phone: {
+			type: String,
+			match: /^01[0-2,5]{1}[0-9]{8}$/g,
+		},
+		anthorPhone: {
+			type: String,
+			match: /^01[0-2,5]{1}[0-9]{8}$/g,
+		},
+		orgEmail: {
+			type: String,
+			match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+		},
 	},
 	//person or company
 	individual: {
@@ -41,8 +51,8 @@ const organizerSchema = new mongoose.Schema({
 	},
 	//the available hours for the orginizer
 	availHours: {
-		startTime: { type: String },//10:00
-		endTime: { type: String },//16:00
+		startTime: { type: String }, //10:00
+		endTime: { type: String }, //16:00
 	},
 	//is the amount of required daposit
 	amountOfRequiredDaposit: {

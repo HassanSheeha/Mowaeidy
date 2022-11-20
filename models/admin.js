@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const adminSchema = new mongoose.Schema({
 	name: {
@@ -21,6 +22,13 @@ const adminSchema = new mongoose.Schema({
 	},
 });
 
+adminSchema.pre("save", async function (next) {
+	this.password = await bcrypt.hash(
+		this.password,
+		parseInt(process.env.SALTROUND)
+	);
+	next();
+});
 const AdminModel = mongoose.model("admin", adminSchema);
 
 module.exports = AdminModel;

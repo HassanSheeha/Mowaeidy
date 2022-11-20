@@ -1,5 +1,7 @@
 const industryModel = require("../models/industry");
-
+const validation = require("../middleware/validation");
+const { organizerSignUpValidation } = require("../helpers/auth.validation");
+const { organizerSignUp } = require("../controllers/registerationController");
 const {
 	getOneOrganizer,
 	addOrganizer,
@@ -14,6 +16,8 @@ const {
 } = require("../controllers/OrganizerControllers");
 const express = require("express");
 const { deleteAppointment } = require("../controllers/AppointmentControllers");
+const { authentication } = require("../middleware/authen");
+const { endPoint } = require("../middleware/endPoint");
 const organizerRouter = express.Router();
 
 // getting one organizer (personal page)
@@ -26,7 +30,11 @@ organizerRouter.get("/view", getOneOrganizerToView);
 organizerRouter.put("/me/edit", editOrganizer);
 
 // adding an appointment
-organizerRouter.post("/appointments/add", addAppointmentOrganizer);
+organizerRouter.post(
+	"/appointments/add",
+	authentication(endPoint.user.appointment),
+	addAppointmentOrganizer
+);
 
 // editing an appointment status
 organizerRouter.put("/appointments/edit", editAppointmentStatus);
@@ -49,6 +57,10 @@ organizerRouter.get("/", getAllOrganizers);
 
 // adding new organizer
 // expermental
-organizerRouter.post("/", addOrganizer);
+organizerRouter.post(
+	"/organizerSignUp",
+	validation(organizerSignUpValidation),
+	organizerSignUp
+);
 
 module.exports = organizerRouter;

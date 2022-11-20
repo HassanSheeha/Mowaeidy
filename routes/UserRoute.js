@@ -1,12 +1,20 @@
 const express = require("express");
 const { deleteAppointment } = require("../controllers/AppointmentControllers");
-const { getOneOrganizerToView } = require("../controllers/OrganizerControllers");
+const {
+	getOneOrganizerToView,
+} = require("../controllers/OrganizerControllers");
 const {
 	addUser,
 	getOneUser,
 	editUser,
 	getAllAppointmentUser,
 } = require("../controllers/UserControllers");
+const validation = require("../middleware/validation");
+const {
+	singUpValidation,
+	singInValidation,
+} = require("../helpers/auth.validation");
+const { signUp, signIn } = require("../controllers/registerationController");
 const userRouter = express.Router();
 
 // getting one user (personal page)
@@ -25,7 +33,9 @@ userRouter.get("/appointments", getAllAppointmentUser);
 userRouter.get("/organzier", getOneOrganizerToView);
 
 // adding new user
-// expermental
-userRouter.post("/", addUser);
+userRouter.post("/signUp", validation(singUpValidation), signUp);
+
+// Login
+userRouter.post("/signIn", validation(singInValidation), signIn);
 
 module.exports = userRouter;

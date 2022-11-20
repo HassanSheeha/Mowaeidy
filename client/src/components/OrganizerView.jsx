@@ -103,8 +103,8 @@ export default function OrganizerView() {
 
 						<div className="col-md-8 col-12">
 							<h4 className="my-3 text-dark">Calender</h4>
-							{/* <OrgViewCalneder organizer={organizer} /> */}
-							<OrgPersonalCalender organizer={organizer} />
+							<OrgViewCalneder organizer={organizer} />
+							{/* <OrgPersonalCalender organizer={organizer} /> */}
 						</div>
 					</div>
 				</div>

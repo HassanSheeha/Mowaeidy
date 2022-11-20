@@ -29,25 +29,26 @@ const authentication = (accessRoles) => {
 				if (!decoded.isLogged) {
 					res.json({ message: "sorry invalid token" });
 				} else {
-					// findById------
 
-					const findUser = await userModel.findById(
-						decoded._id
-					); /*.select("firstName lastName  id ")*/
-					//console.log(findUser)                     /*.select("-password")*/
+					const findUser = await userModel.findById(decoded._id);
+					/*.select("firstName lastName  id ")*/
+					// console.log(findUser) *.select("-password")*/
 					if (!findUser) {
 						res.json({ message: "invalid user token" });
 					} else {
 						if (!accessRoles.includes(findUser.role)) {
 							res.json({ message: "sorry you are not Authorized" });
 						} else {
-							req.user = findUser; ///*  req.user: login الي عمل   user شايله كل بيانات ال  */
+							req.user = findUser;
+							res.json({ message: "token matched data ", findUser });
 							next();
 						}
 					}
 				}
 			}
-		} catch (e) {}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 };
 

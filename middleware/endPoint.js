@@ -5,11 +5,8 @@ const { roles } = require("./authen")
 const endPoint={
 
 user:{
-
     home:[roles.organizer],
-    appointment:[roles.organizer , roles.user],
-   
-
+    appointment:[roles.organizer ],
 },
 organizer:{
     getData:[roles.organizer]

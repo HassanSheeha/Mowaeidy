@@ -77,23 +77,12 @@ const getAllAppointmentUser = async (req, res) => {
 		res.json({ message: "error", err });
 	}
 };
-// adding new User
-// expermental
-const addUser = async (req, res) => {
-	try {
-		const newUser = new userModel(req.body);
-		const savedUser = await newUser.save();
-		res.json({ message: "done", savedUser });
-	} catch (err) {
-		res.json({ message: "error" });
-	}
-};
+
 
 module.exports = {
 	getOneUser,
 	editUser,
 	editUserStatus,
 	getAllUsers,
-	addUser,
 	getAllAppointmentUser,
 };

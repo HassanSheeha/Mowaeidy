@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { string } = require("joi/lib");
+
 const userSchema = new mongoose.Schema({
 	firstName: {
 		type: String,
@@ -43,7 +43,10 @@ const userSchema = new mongoose.Schema({
 		default:
 			"https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg",
 	},
-
+	gender: {
+		type: String,
+		required: true,
+	},
 	organizer: {
 		required: true,
 		type: Boolean,

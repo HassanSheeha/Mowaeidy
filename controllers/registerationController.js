@@ -1,8 +1,10 @@
 const userModel = require("../models/user");
+const AdminModel = require("../models/admin");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { roles } = require("../middleware/authen");
-// SIGN UP------------------------------------------------
+const OrganizerModel = require("../models/organizer");
+//User SIGN UP------------------------------------------------
 const signUp = async (req, res) => {
 	try {
 		const {
@@ -12,11 +14,11 @@ const signUp = async (req, res) => {
 			password,
 			phone,
 			city,
+			gender,
 			role,
 			organizer,
 		} = req.body;
-		// save---
-		//console.log('mohamed')
+		console.log(req.body);
 		const newUser = new userModel({
 			firstName,
 			lastName,
@@ -24,13 +26,18 @@ const signUp = async (req, res) => {
 			password,
 			phone,
 			city,
+			gender,
 			role,
 			organizer,
 		});
 		if (newUser.organizer == true) newUser.role = roles.organizer;
 		const savedUser = await newUser.save();
-		//console.log(savedUser);
-		res.json({ message: "done", savedUser });
+		const token = jwt.sign(
+			{ _id: savedUser._id, isLogged: true },
+			process.env.SIGNiNTOKEN,
+			{ expiresIn: "1h" }
+		);
+		res.json({ message: "userAdd sucessfully", savedUser, token });
 	} catch (e) {
 		if (e.keyValue?.email) {
 			res.json({ message: "Email Exist" });
@@ -42,31 +49,42 @@ const signUp = async (req, res) => {
 // SIGN IN------------------------------------------------
 const signIn = async (req, res) => {
 	try {
-		const { email, password, status } = req.body;
-
-		// FindeOne-------
-		// دورلي بالايميل
-		const user = await userModel.findOne({ email });
-		if (!user) {
-			//null || {}
-
-			res.json({ message: "invalid acount" });
-		} else {
-			// macth : المقارنه بتاعه الباسورد
-			// const match=await bcrypt.compare( body الباسورد الي جاي مالداتا,الباسورد الي انا كاتبه في ال )
-			// التشفير
-			// this.password=await bcrypt.hash(this.password,parseInt(process.env.SALTROUND))
-			// console.log(user);
-			const match = await bcrypt.compare(password, user.password);
-			console.log(match);
-			if (!match) {
-				res.json({ message: "sorry you email or pass is error" });
+		const { email, password, admin } = req.body;
+		if (!admin) {
+			const user = await userModel.findOne({ email });
+			if (!user) {
+				res.json({ message: "invalid acount" });
 			} else {
-				if (status !== "active") {
-					res.json({ message: "error of status please contact us" });
+				if (user.status === "active") {
+					const match = await bcrypt.compare(password, user.password);
+					console.log(password);
+					console.log(user.password);
+					console.log(match);
+					if (!match) {
+						res.json({ message: "sorry you email or pass is error" });
+					} else {
+						const token = jwt.sign(
+							{ _id: user._id, isLogged: true },
+							process.env.SIGNiNTOKEN,
+							{ expiresIn: "1h" }
+						);
+						res.json({ message: "take your token", token });
+					}
 				} else {
-					// create token----->
-					console.log(user._id);
+					res.json({ message: "user is pained please contact us" });
+				}
+			}
+		} else {
+			const user = await AdminModel.findOne({ email });
+			console.log(email);
+			if (!user) {
+				res.json({ message: "invalid acount" });
+			} else {
+				const match = await bcrypt.compare(password, user.password);
+				console.log(match);
+				if (!match) {
+					res.json({ message: "sorry you email or pass is error" });
+				} else {
 					const token = jwt.sign(
 						{ _id: user._id, isLogged: true },
 						process.env.SIGNiNTOKEN,
@@ -81,4 +99,40 @@ const signIn = async (req, res) => {
 		res.json({ message: "sign in error", e });
 	}
 };
-module.exports = { signUp, signIn };
+const organizerSignUp = async (req, res) => {
+	try {
+		const {
+			userIDFK,
+			title,
+			orgName,
+			description,
+			contact,
+			individual,
+			industryIDFK,
+			availDays,
+			availHours,
+			amountOfRequiredDaposit,
+		} = req.body;
+		const newOrganizer = new OrganizerModel({
+			userIDFK,
+			orgName,
+			title,
+			description,
+			contact,
+			individual,
+			industryIDFK,
+			availDays,
+			availHours,
+			amountOfRequiredDaposit,
+		});
+
+		const savedOrganizer = await newOrganizer.save();
+		console.log(savedOrganizer);
+		res.json({ message: "orginzer added successfuly", savedOrganizer });
+	} catch (e) {
+		console.log(e);
+		res.json({ message: "signUp error" });
+	}
+};
+
+module.exports = { signUp, signIn, organizerSignUp };

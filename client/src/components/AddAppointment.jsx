@@ -132,11 +132,13 @@ export default function AddAppointment() {
 			setAlert(true);
 		} else {
 			try {
-				await addAppointment(newAppointment);
+				const resp = await addAppointment(newAppointment);
+				// if(res.message===)
 				setMsg("appointment added");
+				console.log(resp);
 				setAlert(true);
 				setTimeout(() => {
-					navigate("/organizers", { state: organizer?._id });
+					// navigate("/organizers", { state: organizer?._id });
 				}, 3000);
 			} catch (err) {
 				setMsg("try again later");

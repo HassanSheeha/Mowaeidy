@@ -119,6 +119,15 @@ a {
 .form-control:focus {
 	box-shadow: 1px 3px 5px 0 var(--bs-primary);
 }
+.form-check-input:checked {
+	background-color: var(--bs-warning);
+	border-color: var(--bs-warning);
+}
+/* input[type="checkbox"]{
+	background-color: var(--bs-warning);
+	color: var(--bs-warning);
+	border-color: var(--bs-warning);
+} */
 .btn-diffrent {
 	--bs-btn-border-width: 2px;
 	border-radius: 0;
