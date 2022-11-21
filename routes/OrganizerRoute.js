@@ -32,7 +32,7 @@ organizerRouter.put("/me/edit", editOrganizer);
 // adding an appointment
 organizerRouter.post(
 	"/appointments/add",
-	authentication(endPoint.user.appointment),
+	// authentication(endPoint.user.appointment),
 	addAppointmentOrganizer
 );
 
@@ -56,7 +56,6 @@ organizerRouter.get("/search", getAllOrganizersSearch);
 organizerRouter.get("/", getAllOrganizers);
 
 // adding new organizer
-// expermental
 organizerRouter.post(
 	"/organizerSignUp",
 	validation(organizerSignUpValidation),

@@ -57,9 +57,6 @@ const signIn = async (req, res) => {
 			} else {
 				if (user.status === "active") {
 					const match = await bcrypt.compare(password, user.password);
-					console.log(password);
-					console.log(user.password);
-					console.log(match);
 					if (!match) {
 						res.json({ message: "sorry you email or pass is error" });
 					} else {
@@ -68,7 +65,7 @@ const signIn = async (req, res) => {
 							process.env.SIGNiNTOKEN,
 							{ expiresIn: "1h" }
 						);
-						res.json({ message: "take your token", token });
+						res.json({ message: "take your token", token, userId: user._id });
 					}
 				} else {
 					res.json({ message: "user is pained please contact us" });

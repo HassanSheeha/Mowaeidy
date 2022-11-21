@@ -24,7 +24,7 @@ let getUsers = () => axios.get(`${baseUrl}/users`);
 let editUserStatus = (userEmail, user) =>
 	axios.put(`${baseUrl}/users/edit?email=${userEmail}`, user);
 let getOneUser = (userEmail) =>
-	axios.get(`${baseUrl}/users/edit?email=${userEmail}`);
+	axios.get(`${baseUrl}/users/edit?id=${userEmail}`);
 
 // industries
 let getIndustries = () => axios.get(`${baseUrl}/industries`);

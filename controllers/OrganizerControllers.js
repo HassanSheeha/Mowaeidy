@@ -5,7 +5,9 @@ const appointmentModel = require("../models/appointment");
 const getOneOrganizer = async (req, res) => {
 	try {
 		const foundOrganizer = await organzierModel
-			.findOne({ _id: req.query.id })
+			.findOne({ userIDFK: req.query.id })
+			.populate({ path: "userIDFK" })
+			.populate({ path: "industryIDFK" })
 			.exec();
 		if (!foundOrganizer) {
 			res.json({ message: "organizer doesn't exist" });
@@ -54,7 +56,7 @@ const getAllOrganizersSearch = async (req, res) => {
 	// try {
 	const foundOrganizer = await organzierModel
 		.find({})
-		.select("orgName title rating rate numbOfAppointments")
+		.select("orgName title rating description rate numbOfAppointments")
 		.populate({ path: "industryIDFK", select: "name" })
 		.populate({ path: "userIDFK", select: "profilePicture" });
 	if (!foundOrganizer) {
@@ -105,7 +107,7 @@ const getAllAppointmentOrganizer = async (req, res) => {
 			res.json(foundAppointment);
 		}
 	} catch (err) {
-		res.json({ message: "error" });
+		res.json({ message: "error", err });
 	}
 };
 // getting all appointment in organizer view page
@@ -138,8 +140,6 @@ const getAllOrganizers = async (req, res) => {
 		res.json({ message: "error" });
 	}
 };
-
-
 
 module.exports = {
 	getOneOrganizer,

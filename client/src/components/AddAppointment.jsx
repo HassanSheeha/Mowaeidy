@@ -14,7 +14,7 @@ export default function AddAppointment() {
 	const [alert, setAlert] = useState(false);
 	let cancelTime = new Date(eventInfo?.start.getTime());
 	const [newAppointment, setNewAppointment] = useState({
-		madeByFK: "6370f1330eb3929eb565c581", //needs to be generic
+		madeByFK: localStorage.getItem("userId"),
 		madeToFK: organizer?._id,
 		appStartDateTime: eventInfo?.start,
 		appEndDateTime: eventInfo?.end,
@@ -133,13 +133,16 @@ export default function AddAppointment() {
 		} else {
 			try {
 				const resp = await addAppointment(newAppointment);
-				// if(res.message===)
-				setMsg("appointment added");
-				console.log(resp);
-				setAlert(true);
-				setTimeout(() => {
-					// navigate("/organizers", { state: organizer?._id });
-				}, 3000);
+				if (resp?.data?.message === "done") {
+					setMsg("appointment added");
+					setAlert(true);
+					setTimeout(() => {
+						navigate("/organizers", { state: organizer?._id });
+					}, 3000);
+				} else {
+					setMsg("something went wrong");
+					setAlert(true);
+				}
 			} catch (err) {
 				setMsg("try again later");
 				setAlert(true);
@@ -149,7 +152,7 @@ export default function AddAppointment() {
 
 	// exit function
 	const exit = () => {
-		navigate("/organizers/view", { state: organizer?._id });
+		navigate("/organizer/view", { state: organizer?._id });
 	};
 	return (
 		<div className="flying-container">

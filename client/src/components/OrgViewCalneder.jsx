@@ -5,24 +5,26 @@ import daygridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import momentPlugin from "@fullcalendar/moment";
-import { appointmentAPI } from "../API/AppointmentAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllAppointmentsOrg } from "../store/reducer/appointSlice";
 
 export default function OrgViewCalneder({ organizer }) {
-	const { getDisapledAppointments } = appointmentAPI;
+	const { appointments, isDone } = useSelector((state) => state.appointReducer);
+	const dispatch = useDispatch();
+
 	const navigate = useNavigate();
 	const [eventInfo, setEventInfo] = useState();
 	let now = new Date();
 	let availTime = new Date();
 	availTime = availTime.setMonth(now.getMonth() + 1);
-	
+
 	// setting calender events
 	const [organizerEvents, setOrganizerEvents] = useState([]);
-	const [events, setEvents] = useState([
+	const events = [
 		// denay access to previous times
 		{
 			start: new Date("1822-01-01"),
 			end: now,
-			title: "hassan",
 			display: "background",
 			backgroundColor: "gray",
 		},
@@ -30,79 +32,82 @@ export default function OrgViewCalneder({ organizer }) {
 		{
 			start: availTime,
 			end: new Date("3022-01-01"),
-			title: "hassan",
 			display: "background",
 			backgroundColor: "gray",
 		},
-	]);
+	];
 
 	const businessHours = {
 		daysOfWeek: organizer?.availDays,
 		startTime: organizer?.availHours?.startTime, // a start time
 		endTime: organizer?.availHours?.endTime, // an end time
-		color: "green",
 	};
 
 	const addApp = (info) => {
-		if (!info.allDay && info.start > now && info.end < availTime) {
-			setEventInfo(info);
-			navigate("/organizers/view/addAppointment");
+		if (localStorage.getItem("userId")) {
+			if (!info.allDay && info.start > now && info.end < availTime) {
+				setEventInfo(info);
+				navigate("/organizer/view/addAppointment");
+			}
+		} else {
+			navigate("/login");
 		}
 	};
 	useEffect(() => {
-		getAppointments();
+		dispatch(getAllAppointmentsOrg(organizer?._id));
 		// eslint-disable-next-line
 	}, []);
-
+	useEffect(() => {
+		if (isDone) setOrgAppointments();
+		// eslint-disable-next-line
+	}, [isDone]);
 	// denay access to current organizer event
-	const getAppointments = async () => {
-		try {
-			const res = await getDisapledAppointments(organizer?._id);
-			if (res?.data?.message === "error") {
-				navigate("/organizers");
-			} else {
-				res?.data.map((oneApp) => {
-					setOrganizerEvents((organizerEvents) => [
-						...organizerEvents,
-						{
-							start: oneApp?.appStartDateTime,
-							end: oneApp?.appEndDateTime,
-							display: "background",
-							backgroundColor: "red",
-							id: oneApp?.appID,
-						},
-					]);
-				});
-			}
-		} catch (err) {}
+	const setOrgAppointments = () => {
+		let appColor;
+		appointments?.map((oneApp) => {
+			setOrganizerEvents((organizerEvents) => [
+				...organizerEvents,
+				{
+					start: oneApp?.appStartDateTime,
+					end: oneApp?.appEndDateTime,
+					display: "background",
+					backgroundColor: "red",
+					id: oneApp?.appID,
+				},
+			]);
+		});
 	};
 
 	return (
 		<>
-			<FullCalendar
-				plugins={[
-					daygridPlugin,
-					interactionPlugin,
-					timeGridPlugin,
-					momentPlugin,
-				]}
-				firstDay="6" //starts with saturday
-				allDaySlot={false}
-				selectConstraint={"businessHours"}
-				selectOverlap={false}
-				views={["dayGridMonth", "timeGridWeek", "timeGridDay"]} //the avail views
-				headerToolbar={{
-					start: "today prev next",
-					end: "dayGridMonth timeGridWeek timeGridDay",
-				}}
-				selectMirror={true} //placeholder
-				events={(events, organizerEvents)} //show events in calender
-				businessHours={businessHours}
-				selectable //enable select date
-				select={addApp} //selected date callback
-				// initialView={"timeGridFourDay"}
-			/>
-			<Outlet context={{ eventInfo, organizer }} />
+			{isDone && (
+				<div>
+					<FullCalendar
+						plugins={[
+							daygridPlugin,
+							interactionPlugin,
+							timeGridPlugin,
+							momentPlugin,
+						]}
+						firstDay="6" //starts with saturday
+						allDaySlot={false}
+						selectConstraint={"businessHours"}
+						selectOverlap={false}
+						views={["dayGridMonth", "timeGridWeek", "timeGridDay"]} //the avail views
+						headerToolbar={{
+							start: "today prev next",
+							end: "dayGridMonth timeGridWeek timeGridDay",
+						}}
+						selectMirror={true} //placeholder
+						events={(events, organizerEvents)} //show events in calender
+						businessHours={businessHours}
+						selectable //enable select date
+						select={addApp} //selected date callback
+						// initialView={"timeGridFourDay"}
+					/>
+					<Outlet context={{ eventInfo, organizer }} />
+				</div>
+			)}
 		</>
 	);
 }

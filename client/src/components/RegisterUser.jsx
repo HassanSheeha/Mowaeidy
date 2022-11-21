@@ -103,10 +103,11 @@ export default function RegisterUser() {
 				setAlert(true);
 			} else if (res?.data?.message === "userAdd sucessfully") {
 				localStorage.setItem("token", res?.data?.token);
+				localStorage.setItem("userId", res?.data?.savedUser?._id);
 				setMsg("user added");
 				setAlert(true);
 				setTimeout(() => {
-						navigate("/home");
+					navigate("/home");
 				}, 3000);
 			}
 		} catch (error) {

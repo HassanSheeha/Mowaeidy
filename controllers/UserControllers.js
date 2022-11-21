@@ -5,11 +5,11 @@ const userModel = require("../models/user");
 const getOneUser = async (req, res) => {
 	try {
 		const foundUser = await userModel
-			.findOne({ email: req.query.email })
+			.findOne({ _id: req.query.id })
 			.select("-password")
 			.exec();
 		if (!foundUser) {
-			res.json({ message: "organizer doesn't exist" });
+			res.json({ message: "user doesn't exist" });
 		} else {
 			res.json(foundUser);
 		}
@@ -22,7 +22,7 @@ const getOneUser = async (req, res) => {
 const editUser = async (req, res) => {
 	try {
 		const updatedUser = await userModel
-			.findOneAndUpdate({ email: req.query.email }, req.body)
+			.findOneAndUpdate({ _id: req.query.id }, req.body)
 			.exec();
 		updatedUser
 			? res.json({ message: "user updated" })
@@ -63,9 +63,11 @@ const getAllUsers = async (req, res) => {
 // getting an appointment in user page
 const getAllAppointmentUser = async (req, res) => {
 	try {
-		const foundAppointment = await AppointmentModel.find({madeByFK: req.query.id,})
+		const foundAppointment = await AppointmentModel.find({
+			madeByFK: req.query.id,
+		})
 			.select("-userFeedback -madeByFK -organiserFeedback")
-			.populate({ path: "madeToFK", select: "orgName contact" })
+			.populate({ path: "madeToFK", select: "orgName title contact" })
 			.populate({ path: "industryIDFK", select: "name" })
 			.exec();
 		if (!foundAppointment) {
@@ -77,7 +79,6 @@ const getAllAppointmentUser = async (req, res) => {
 		res.json({ message: "error", err });
 	}
 };
-
 
 module.exports = {
 	getOneUser,

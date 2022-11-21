@@ -3,8 +3,8 @@ import axios from "axios";
 const baseUrl = "http://localhost:5000/organizer/appointments";
 let addAppointment = async (appointment) => {
 	try {
-		axios.post(`${baseUrl}/add`, appointment);
-		return false;
+		const res =axios.post(`${baseUrl}/add`, appointment);
+		return res;
 	} catch (err) {
 		return "error";
 	}

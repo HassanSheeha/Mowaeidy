@@ -18,8 +18,8 @@ export default function UsersData() {
 			console.log(error);
 		}
 	};
-	const editUser = (userEmail) => {
-		setUserToUpdate(userEmail);
+	const editUser = (userID) => {
+		setUserToUpdate(userID);
 		navigate("/adminpanel/users/edit");
 	};
 
@@ -87,7 +87,7 @@ export default function UsersData() {
 									<td>
 										<button
 											className="btn border-0 p-0"
-											onClick={() => editUser(user?.email)}
+											onClick={() => editUser(user?._id)}
 										>
 											<AiFillEdit className="fs-4 text-danger" />
 										</button>

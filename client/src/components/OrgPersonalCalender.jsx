@@ -5,11 +5,12 @@ import daygridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import momentPlugin from "@fullcalendar/moment";
-import { appointmentAPI } from "../API/AppointmentAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllAppointmentsOrg } from "../store/reducer/appointSlice";
 
 export default function OrgPersonalCalender({ organizer }) {
-	const { getDisapledAppointments } = appointmentAPI;
-	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const { appointments, isDone } = useSelector((state) => state.appointReducer);
 	// const [eventInfo, setEventInfo] = useState();
 
 	// setting calender events
@@ -19,7 +20,6 @@ export default function OrgPersonalCalender({ organizer }) {
 		daysOfWeek: organizer?.availDays,
 		startTime: organizer?.availHours?.startTime, // a start time
 		endTime: organizer?.availHours?.endTime, // an end time
-		color: "green",
 	};
 	// const handleSelect = (info) => {
 	// 	console.log(info);
@@ -39,60 +39,65 @@ export default function OrgPersonalCalender({ organizer }) {
 	// 	console.log(events);
 	// };
 	useEffect(() => {
-		getAppointments();
+		dispatch(getAllAppointmentsOrg(organizer?._id));
 		// eslint-disable-next-line
 	}, []);
+	useEffect(() => {
+		if (isDone) setOrgAppointments();
+		// eslint-disable-next-line
+	}, [isDone]);
 
-	// denay access to current organizer event
-	const getAppointments = async () => {
-		try {
-			const res = await getDisapledAppointments(organizer?._id);
-			if (res?.data?.message === "error") {
-				navigate("/organizers");
-			} else {
-				res?.data.map((oneApp) => {
-					setOrganizerEvents((organizerEvents) => [
-						...organizerEvents,
-						{
-							start: oneApp?.appStartDateTime,
-							end: oneApp?.appEndDateTime,
-							backgroundColor: "green",
-              title:"sheeha",
-							id: oneApp?.appID,
-						},
-					]);
-				});
+	// show current organizer event
+	const setOrgAppointments = () => {
+		let appColor;
+		appointments?.map((oneApp) => {
+			if (oneApp?.status == "pending") {
+				appColor="yellow"
+			}else if (oneApp?.status == "confirmed") {
+				appColor = "green";
 			}
-		} catch (err) {}
+				setOrganizerEvents((organizerEvents) => [
+					...organizerEvents,
+					{
+						start: oneApp?.appStartDateTime,
+						end: oneApp?.appEndDateTime,
+						backgroundColor: appColor,
+						title: oneApp?.madeByFK?.lastName,
+						id: oneApp?.appID,
+					},
+				]);
+		});
 	};
 
 	return (
 		<>
-			<FullCalendar
-				plugins={[
-					daygridPlugin,
-					interactionPlugin,
-					timeGridPlugin,
-					momentPlugin,
-				]}
-				firstDay="6" //starts with saturday
-				allDaySlot={false} //to hide all day slot
-				dayMaxEventRows={true}
-				views={["dayGridMonth", "timeGridWeek", "timeGridDay"]} //the avail views
-				eventTimeFormat={{
-					hour: "numeric",
-					minute: "2-digit",
-					meridiem: "short",
-				}}
-				headerToolbar={{
-					start: "today prev next",
-					end: "dayGridMonth timeGridWeek timeGridDay",
-				}}
-				events={organizerEvents} //show events in calender
-				businessHours={businessHours}//apply bussines hours
-				// eventClick={addApp}
-				// initialView={"timeGridFourDay"}
-			/>
+			{isDone && (
+				<FullCalendar
+					plugins={[
+						daygridPlugin,
+						interactionPlugin,
+						timeGridPlugin,
+						momentPlugin,
+					]}
+					firstDay="6" //starts with saturday
+					allDaySlot={false} //to hide all day slot
+					dayMaxEventRows={true}
+					views={["dayGridMonth", "timeGridWeek", "timeGridDay"]} //the avail views
+					eventTimeFormat={{
+						hour: "numeric",
+						minute: "2-digit",
+						meridiem: "short",
+					}}
+					headerToolbar={{
+						start: "today prev next",
+						end: "dayGridMonth timeGridWeek timeGridDay",
+					}}
+					events={organizerEvents} //show events in calender
+					businessHours={businessHours} //apply bussines hours
+					// eventClick={addApp}
+					// initialView={"timeGridFourDay"}
+				/>
+			)}
 			{/* <Outlet context={{ eventInfo, organizer }} /> */}
 		</>
 	);

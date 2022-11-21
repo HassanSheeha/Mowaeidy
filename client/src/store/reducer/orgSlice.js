@@ -7,6 +7,8 @@ const initialState = {
 	organizers: [],
 	filteredOrgs: [],
 	isLoading: false,
+	isDone: false,
+	isOrganizer: false,
 	error: null,
 	editedOrg: false,
 	// addedOrg: false,
@@ -16,7 +18,6 @@ const initialState = {
 export const getAllOrganizers = createAsyncThunk(
 	"orgs/getAllOrganizers",
 	async (args, thunkAPI) => {
-		//??????
 		const { rejectWithValue } = thunkAPI;
 		try {
 			const response = await axios.get(`${baseUrl}/search`);
@@ -28,18 +29,18 @@ export const getAllOrganizers = createAsyncThunk(
 	}
 );
 
-// export const getOneOrganizerMe = createAsyncThunk(
-// 	"orgs/getOneOrganizerMe",
-// 	async (orgId, thunkAPI) => {
-// 		const { rejectWithValue } = thunkAPI;
-// 		try {
-// 			const response = await axios.get(`${baseUrl}/me?id=${orgId}`);
-// 			return response.data;
-// 		} catch (error) {
-// 			return rejectWithValue(error.message);
-// 		}
-// 	}
-// );
+export const getOneOrganizerMe = createAsyncThunk(
+	"orgs/getOneOrganizerMe",
+	async (orgId, thunkAPI) => {
+		const { rejectWithValue } = thunkAPI;
+		try {
+			const response = await axios.get(`${baseUrl}/me?id=${orgId}`);
+			return response.data;
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
+);
 export const getOneOrganizerView = createAsyncThunk(
 	"orgs/getOneOrganizerView",
 	async (orgId, thunkAPI) => {
@@ -69,7 +70,7 @@ export const editOrganizerMe = createAsyncThunk(
 		const { rejectWithValue } = thunkAPI;
 		// console.log({args});
 		try {
-			const response = await axios.patch(
+			const response = await axios.put(
 				`${baseUrl}/me/edit?id=${args.idArg}`,
 				args.orgArg
 			); //must have same names in the fired action
@@ -137,6 +138,7 @@ const orgSlice = createSlice({
 			.addCase(getOneOrganizerView.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.organizer = action.payload;
+				state.isDone = true;
 				state.error = null;
 				state.editedOrg = false;
 				// state.addedOrg = false;
@@ -146,22 +148,26 @@ const orgSlice = createSlice({
 				state.isLoading = false;
 				state.error = action.payload;
 			})
-			//------------------ Get org by ID
-			// .addCase(getOneOrganizer.pending, (state, action) => {
-			// 	state.isLoading = true;
-			// })
-			// .addCase(getOneOrganizer.fulfilled, (state, action) => {
-			// 	state.isLoading = false;
-			// 	state.organizer = action.payload;
-			// 	state.error = null;
-			// 	state.editedOrg = false;
-			// 	// state.addedOrg = false;
-			// 	// state.deletedOrg = false;
-			// })
-			// .addCase(getOneOrganizer.rejected, (state, action) => {
-			// 	state.isLoading = false;
-			// 	state.error = action.payload;
-			// })
+			//------------------ Get org by ID (personal)
+			.addCase(getOneOrganizerMe.pending, (state, action) => {
+				state.isLoading = true;
+			})
+			.addCase(getOneOrganizerMe.fulfilled, (state, action) => {
+				state.isLoading = false;
+				if (action.payload?.message !== "organizer doesn't exist") {
+					state.isOrganizer = true;
+				}
+				state.organizer = action.payload;
+				state.isDone = true;
+				state.error = null;
+				state.editedOrg = false;
+				// state.addedOrg = false;
+				// state.deletedOrg = false;
+			})
+			.addCase(getOneOrganizerMe.rejected, (state, action) => {
+				state.isLoading = false;
+				state.error = action.payload;
+			})
 			//------------------ Add org
 			// .addCase(addOrganizer.pending, (state, action) => {
 			//     state.isLoading = true;
