@@ -133,7 +133,6 @@ export default function RegisterOrganizer() {
 		keys.map((key) => {
 			if (days[key] !== 7) {
 				availDays.push(days[key]);
-				console.log(availDays);
 			}
 			return days;
 		});
@@ -154,12 +153,10 @@ export default function RegisterOrganizer() {
 			setDaysError(true);
 		} else {
 			add(newOrganizer);
-			console.log(newOrganizer);
 		}
 	};
 	useEffect(() => {
 		getAllIndustries();
-		console.log(id);
 	}, []);
 
 	return (

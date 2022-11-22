@@ -27,7 +27,11 @@ organizerRouter.get("/me", getOneOrganizer);
 organizerRouter.get("/view", getOneOrganizerToView);
 
 // editing an organizer
-organizerRouter.put("/me/edit", editOrganizer);
+organizerRouter.put(
+	"/me/edit",
+	validation(organizerSignUpValidation),
+	editOrganizer
+);
 
 // adding an appointment
 organizerRouter.post(
