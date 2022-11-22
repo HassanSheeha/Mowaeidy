@@ -56,6 +56,7 @@ export default function RegisterUser() {
 				setAlert(true);
 			} else if (res?.data?.message === "userAdd sucessfully") {
 				const userId = res?.data?.savedUser?._id;
+				localStorage.setItem("userId", res?.data?.savedUser?._id);
 				localStorage.setItem("token", res?.data?.token);
 				setMsg("user added");
 				setAlert(true);
@@ -121,11 +122,11 @@ export default function RegisterUser() {
 				<div className="col-lg-4 col-md-6 col-sm-6">
 					<img
 						src="/Assets/Images/register.png"
-						alt="booster"
-						className="booster"
+						alt="register"
+						className="booster-register"
 					></img>
 				</div>
-				<div className="  col-sm-6 col-md-6 col-lg-8 mt-5 form">
+				<div className="col-sm-6 col-md-6 col-lg-8 mt-5 form">
 					<div className="mb-5">
 						<h1 className="text-dark fs-1">
 							Welcome To <span className="title fs-1">Mowaidy</span>
@@ -136,7 +137,7 @@ export default function RegisterUser() {
 					</div>
 					<Form onSubmit={handleSubmit(onSubmit)}>
 						<Row className="row mx-5">
-							<Col className=" mx-5 col-lg-4 col-md-4 col-4">
+							<Col sm={12} lg={6} >
 								<span className="label">First Name</span>
 								<Form.Control
 									className="fields"
@@ -161,7 +162,7 @@ export default function RegisterUser() {
 									</p>
 								)}
 							</Col>
-							<Col className="col-lg-5 col-md-5 col-4">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<label className="label">Last Name</label>
 								<Form.Control
 									className="fields"
@@ -188,7 +189,7 @@ export default function RegisterUser() {
 							</Col>
 						</Row>
 						<Row className="row mx-5 mt-4">
-							<Col className=" mx-5 col-lg-4 col-md-4 col-4">
+							<Col sm={12} lg={6}>
 								<div className="radios mt-3">
 									<h6 className="label">Gender</h6>
 									<div className="gender-radio mt-3">
@@ -228,7 +229,7 @@ export default function RegisterUser() {
 									</div>
 								</div>
 							</Col>
-							<Col className=" col-lg-5 col-md-5 col-4">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<label className="label">E-mail</label>
 								<Form.Control
 									className="fields"
@@ -252,7 +253,7 @@ export default function RegisterUser() {
 						</Row>
 
 						<Row className="row mx-5 mt-2">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6}>
 								<label className="label">Phone</label>
 								<Form.Control
 									placeholder="+201550335767"
@@ -281,7 +282,7 @@ export default function RegisterUser() {
 									</p>
 								)}
 							</Col>
-							<Col className=" col-lg-5">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<label className="label">City</label>
 								<Form.Select
 									aria-label="Select Your City"
@@ -304,7 +305,7 @@ export default function RegisterUser() {
 							</Col>
 						</Row>
 						<Row className="row mx-5 mt-4">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6}>
 								<label className="label">password</label>
 								<Form.Control
 									placeholder="write strong passcode"
@@ -329,7 +330,7 @@ export default function RegisterUser() {
 									</p>
 								)}
 							</Col>
-							<Col className="col-lg-5">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<label className="label">Re-password</label>
 								<Form.Control
 									placeholder="confirm your password"
@@ -349,8 +350,8 @@ export default function RegisterUser() {
 								)}
 							</Col>
 						</Row>
-						<Row className="row mx-5 mt-4">
-							<Col className=" mx-5 col-lg-4">
+						<Row className="mx-5 mt-4">
+							<Col sm={12} lg={6}className="">
 								<label className="label">Date Of Birth</label>
 								<Form.Control
 									placeholder="write strong passcode"
@@ -359,8 +360,8 @@ export default function RegisterUser() {
 									className="fields"
 								/>
 							</Col>
-							<Col className="col-lg-5">
-								<p className=" check1 mt-5">
+							<Col sm={12} lg={6}className="mt-lg-0 align-self-end mt-3">
+								<p className=" check1 fs-6 ">
 									Sign up as an
 									<span className="check">ORGANIZER</span> ?
 									<input
@@ -373,17 +374,16 @@ export default function RegisterUser() {
 							</Col>
 						</Row>
 
-						<Row className="row mx-5 mt-4 d-flex">
-							<Col className=" mx-4 col-lg-5 ">
+						<Row className="row mx-5 my-4 d-flex">
+							<Col sm={12} lg={6}>
 								<p className="already">
-									Already have an account ?
+									Already have an account? 
 									<a className="login" href="#" onClick={loginRefHandler}>
-										LOGIN
+									{"	LOGIN"}
 									</a>
 								</p>
 							</Col>
-
-							<Col className="col-lg-4 d-flex">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								{check === true ? (
 									<button
 										className="btn1 btn-primary mx-2 rounded-4 "

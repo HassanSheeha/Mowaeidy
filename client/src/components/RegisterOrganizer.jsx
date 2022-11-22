@@ -162,14 +162,14 @@ export default function RegisterOrganizer() {
 	return (
 		<div className=" container container-register">
 			<div className="row">
-				<div className="col-lg-4 mt-5">
+			    <div className="col-lg-4 col-md-6 col-sm-6">
 					<img
 						src="/Assets/Images/register.png"
-						alt="booster"
-						className="booster"
+						alt="register"
+						className="booster-register"
 					></img>
 				</div>
-				<div className="col-lg-8 mt-5 form">
+				<div className="col-sm-6 col-md-6 col-lg-8 mt-5 form">
 					<div className="mb-5">
 						<h1 className="text-dark fs-1">
 							Welcome To <span className="title fs-1">Mowaidy</span>
@@ -180,7 +180,7 @@ export default function RegisterOrganizer() {
 					</div>
 					<Form>
 						<Row className="row mx-5">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6} className="">
 								<span className="label">Org Name</span>
 								<Form.Control
 									className="fields"
@@ -205,7 +205,7 @@ export default function RegisterOrganizer() {
 									</p>
 								)}
 							</Col>
-							<Col className="col-lg-5">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<span className="label">Title</span>
 								<Form.Control
 									className="fields"
@@ -234,7 +234,7 @@ export default function RegisterOrganizer() {
 
 						{/** phones */}
 						<Row className="row mx-5 mt-4">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6}>
 								<label className="label">Phone</label>
 								<Form.Control
 									className="fields"
@@ -257,9 +257,10 @@ export default function RegisterOrganizer() {
 								)}
 							</Col>
 
-							<Col className=" col-lg-5">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
+	
 								<label className="label">
-									Anthor Phone <span className="option">(optional)</span>
+									Anthor Phone <span className="option mx-2">(optional)</span>
 								</label>
 								<Form.Control
 									className="fields"
@@ -284,9 +285,9 @@ export default function RegisterOrganizer() {
 
 						{/** orgEmail and description */}
 						<Row className="row mx-5 mt-2">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6} className="" >
 								<label className="label">
-									Org E-mail <span className="option2">(optional)</span>
+									Org E-mail <span className="option2 mx-2">(optional)</span>
 								</label>
 								<Form.Control
 									placeholder="ITI@ddd.com"
@@ -308,12 +309,12 @@ export default function RegisterOrganizer() {
 									</p>
 								)}
 							</Col>
-							<Col className=" col-lg-5">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<div className="form-group">
 									<label className="label">Description</label>
 									<textarea
 										class="field"
-										rows="1"
+										rows={1}
 										className="text2"
 										name="description"
 										placeholder="Introduce Yourself"
@@ -338,7 +339,7 @@ export default function RegisterOrganizer() {
 							</Col>
 						</Row>
 						<Row className="row mx-5 mt-2">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6}>
 								<label className="label">Indusrty</label>
 								<Form.Select
 									className="fields"
@@ -357,7 +358,7 @@ export default function RegisterOrganizer() {
 										})}
 								</Form.Select>
 							</Col>
-							<Col className=" col-lg-5">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								{allowPayment && (
 									<>
 										<label className="label">Minimun Salary</label>
@@ -381,100 +382,96 @@ export default function RegisterOrganizer() {
 						</Row>
 
 						<div className="mx-5">
-							<Row className="row mx-5 mt-2">
-								<Col>
+							<Row className=" mt-4 mb-4">
+								<Col sm={12} md={6} lg={3}>
 									{" "}
 									<p className="label">
-										Saturday
 										<input
 											type="checkbox"
 											name="sat"
 											value={6}
-											className="ch1"
+											className="ch1 mx-2"
 											onChange={daysHandler}
 										></input>
+										Saturday
 									</p>
 								</Col>
-								<Col>
+								<Col sm={12} md={6} lg={3} >
 									{" "}
 									<p className="label">
-										Sunday
 										<input
 											type="checkbox"
 											name="sun"
 											value={0}
-											className="ch1 mx-5"
+											className="ch1 mx-2"
 											onChange={daysHandler}
 										></input>
+										Sunday
 									</p>
 								</Col>
-								<Col>
+								<Col sm={12} md={6} lg={3} >
 									{" "}
 									<p className="label">
-										Monday
 										<input
 											type="checkbox"
 											name="mon"
 											value={1}
-											className="ch1 mx-3"
+											className="ch1 mx-2"
 											onChange={daysHandler}
 										></input>
+										Monday
 									</p>
 								</Col>
-							</Row>
-							<Row className="row mx-5 mt-2">
-								<Col>
+								<Col sm={12} md={6} lg={3}>
 									{" "}
 									<p className="label">
-										Tuesday
 										<input
 											type="checkbox"
 											name="tue"
 											value={2}
-											className="ch1 mx-3"
+											className="ch1 mx-2"
 											onChange={daysHandler}
 										></input>
+										Tuesday
 									</p>
 								</Col>
-								<Col>
+								<Col sm={12} md={6} lg={3}>
 									{" "}
 									<p className="label">
-										Wednesday
 										<input
 											type="checkbox"
 											name="wed"
 											value={3}
-											className="ch1"
+											className="ch1 mx-2"
 											onChange={daysHandler}
 										></input>
+										Wednesday
 									</p>
 								</Col>
-								<Col>
+								<Col sm={12} md={6} lg={3} >
 									{" "}
 									<p className="label">
-										Thursday
 										<input
 											type="checkbox"
 											name="thu"
 											value={4}
-											className="ch1"
+											className="ch1 mx-2"
 											onChange={daysHandler}
 										></input>
+										Thursday
 									</p>
 								</Col>
-							</Row>
-							<Row className="row mx-5 mt-2">
-								<Col>
+								<Col sm={12} md={6} lg={3} >
 									{" "}
-									<p className="label mx-1">
-										Friday
+									<p className="label">
 										<input
 											type="checkbox"
 											name="fri"
 											value={5}
-											className="ch1 mx-4"
+											className="ch1 mx-2"
 											onChange={daysHandler}
 										></input>
+										Friday
 									</p>
 								</Col>
 								{daysError && (
@@ -483,10 +480,12 @@ export default function RegisterOrganizer() {
 									</p>
 								)}
 							</Row>
+							
+							
 						</div>
 						{/** Time  */}
 						<Row className="row mx-5 mt-2">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6} >
 								<label className="label">Start Time</label>
 								<Form.Control
 									type="time"
@@ -504,7 +503,7 @@ export default function RegisterOrganizer() {
 								)}
 							</Col>
 
-							<Col className=" col-lg-5">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<label className="label">End Time</label>
 								<Form.Control
 									type="time"
@@ -524,13 +523,14 @@ export default function RegisterOrganizer() {
 						</Row>
 
 						<Row className="row mx-5 mt-4">
-							<Col className=" mx-5 col-lg-4">
+							<Col sm={12} lg={6} >
 								<div className="form-group">
 									<label className="label">Question To Your Client</label>
 									<textarea
 										class="field"
 										placeholder="Write Your Question"
 										className="text"
+										rows={3}
 									></textarea>
 									<p className=" label mt-5">
 										Indvidual
@@ -545,9 +545,9 @@ export default function RegisterOrganizer() {
 							<Col className=" mx-3 col-lg-4"></Col>
 						</Row>
 
-						<Row className="row mx-5 mt-4">
+						<Row className="row mx-5 my-4 d-flex">
 							<Col className=" mx-4 col-lg-5"></Col>
-							<Col className="col-lg-4">
+							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
 								<button
 									className="btn2 btn-warning mx-2 rounded-4"
 									onClick={handleSubmit(onSubmit)}
