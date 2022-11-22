@@ -6,6 +6,7 @@ export default function AboutPage() {
   const dispatch = useDispatch();
 	const { infos } = useSelector((state) => state.info);
 
+	
 	// loading data
 	useEffect(() => {
 		dispatch(getinfo());
