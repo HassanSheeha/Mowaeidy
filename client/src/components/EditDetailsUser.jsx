@@ -52,6 +52,7 @@ export default function UserEditDetails() {
 				[e.target.name]: "Input field is required",
 			});
 		}
+		console.log(formData);
 	};
 
 	//----Button fires Action to edit

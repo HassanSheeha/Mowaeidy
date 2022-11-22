@@ -26,6 +26,6 @@ app.use("/organizer", organizerRoute);
 app.use("/industries", searchRouter);
 app.use("/adminpanel", dashboardRouter);
 app.use("/blogs", blogRouter);
-app.use("/user", authRouter);
+// app.use("/user", authRouter);
 
 module.exports = app;

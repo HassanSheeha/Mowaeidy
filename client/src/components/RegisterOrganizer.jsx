@@ -133,7 +133,6 @@ export default function RegisterOrganizer() {
 		keys.map((key) => {
 			if (days[key] !== 7) {
 				availDays.push(days[key]);
-				console.log(availDays);
 			}
 			return days;
 		});
@@ -154,18 +153,16 @@ export default function RegisterOrganizer() {
 			setDaysError(true);
 		} else {
 			add(newOrganizer);
-			console.log(newOrganizer);
 		}
 	};
 	useEffect(() => {
 		getAllIndustries();
-		console.log(id);
 	}, []);
 
 	return (
 		<div className=" container container-register">
 			<div className="row">
-			    <div className="col-lg-4 col-md-6 col-sm-6">
+				<div className="col-lg-4 col-md-6 col-sm-6">
 					<img
 						src="/Assets/Images/register.png"
 						alt="register"
@@ -261,7 +258,6 @@ export default function RegisterOrganizer() {
 							</Col>
 
 							<Col sm={12} lg={6} className="mt-lg-0 mt-3">
-	
 								<label className="label">
 									Anthor Phone <span className="option mx-2">(optional)</span>
 								</label>
@@ -288,7 +284,7 @@ export default function RegisterOrganizer() {
 
 						{/** orgEmail and description */}
 						<Row className="row mx-5 mt-2">
-							<Col sm={12} lg={6} className="" >
+							<Col sm={12} lg={6} className="">
 								<label className="label">
 									Org E-mail <span className="option2 mx-2">(optional)</span>
 								</label>
@@ -399,7 +395,7 @@ export default function RegisterOrganizer() {
 										Saturday
 									</p>
 								</Col>
-								<Col sm={12} md={6} lg={3} >
+								<Col sm={12} md={6} lg={3}>
 									{" "}
 									<p className="label">
 										<input
@@ -412,7 +408,7 @@ export default function RegisterOrganizer() {
 										Sunday
 									</p>
 								</Col>
-								<Col sm={12} md={6} lg={3} >
+								<Col sm={12} md={6} lg={3}>
 									{" "}
 									<p className="label">
 										<input
@@ -451,7 +447,7 @@ export default function RegisterOrganizer() {
 										Wednesday
 									</p>
 								</Col>
-								<Col sm={12} md={6} lg={3} >
+								<Col sm={12} md={6} lg={3}>
 									{" "}
 									<p className="label">
 										<input
@@ -464,7 +460,7 @@ export default function RegisterOrganizer() {
 										Thursday
 									</p>
 								</Col>
-								<Col sm={12} md={6} lg={3} >
+								<Col sm={12} md={6} lg={3}>
 									{" "}
 									<p className="label">
 										<input
@@ -483,12 +479,10 @@ export default function RegisterOrganizer() {
 									</p>
 								)}
 							</Row>
-							
-							
 						</div>
 						{/** Time  */}
 						<Row className="row mx-5 mt-2">
-							<Col sm={12} lg={6} >
+							<Col sm={12} lg={6}>
 								<label className="label">Start Time</label>
 								<Form.Control
 									type="time"
@@ -526,7 +520,7 @@ export default function RegisterOrganizer() {
 						</Row>
 
 						<Row className="row mx-5 mt-4">
-							<Col sm={12} lg={6} >
+							<Col sm={12} lg={6}>
 								<div className="form-group">
 									<label className="label">Question To Your Client</label>
 									<textarea
