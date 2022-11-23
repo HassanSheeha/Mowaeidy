@@ -63,7 +63,7 @@ const organizerSchema = new mongoose.Schema({
 	//if the organizer needs to aske the user a question when making an appointment
 	question: {
 		type: String,
-		default: null,
+		default:''
 	},
 	//the organizer rate
 	rate: {

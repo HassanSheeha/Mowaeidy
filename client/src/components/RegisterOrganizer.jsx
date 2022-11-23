@@ -136,7 +136,7 @@ export default function RegisterOrganizer() {
 			}
 			return days;
 		});
-		const { amountOfRequiredDaposit, description, orgName, title } = data;
+		const { amountOfRequiredDaposit,question , description, orgName, title } = data;
 		const newOrganizer = {
 			amountOfRequiredDaposit,
 			description,
@@ -144,6 +144,7 @@ export default function RegisterOrganizer() {
 			title,
 			individual,
 			contact,
+			question,
 			availHours,
 			availDays,
 			industryIDFK,
@@ -527,6 +528,7 @@ export default function RegisterOrganizer() {
 										class="field"
 										placeholder="Write Your Question"
 										className="text"
+										name="question"
 										rows={3}
 									></textarea>
 									<p className=" label mt-5">
