@@ -21,7 +21,7 @@ export default function FtReminder() {
 							the daily, simple reminder you need right now in your life.
 						</p>
 					</Col>
-					<Col md={{ span: 6, order: 2 }} xs={{ span: 12, order: 1 }}>
+					<Col md={{ span: 5, order: 2 }} xs={{ span: 12, order: 1 }}>
 						<img
 							className="sec-image-reminder rounded-4"
 							src="Assets/Images/ftReminders.jpg"

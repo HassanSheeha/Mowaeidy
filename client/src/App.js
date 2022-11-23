@@ -24,12 +24,11 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import RegisterUser from "./components/RegisterUser";
 import RegisterOrganizer from "./components/RegisterOrganizer";
-////
 import ProfileDetails from "./components/profileDetails";
 import EditDetails from "./components/EditDetailsOrg";
 import UserProfileDetails from "./components/profileDetailsUser";
 import UserEditDetails from "./components/EditDetailsUser";
-import AddPassword from "./components/AddPassword";
+// import AddPassword from "./components/AddPassword";
 
 import OrganizersPage from "./pages/OrganizersPage";
 import ContactPage from "./pages/ContactPage";
@@ -52,7 +51,7 @@ function App() {
 				<Route path="organizer/me/edit" element={<EditDetails />} />
 				<Route path="user/me" element={<UserProfileDetails />} />
 				<Route path="user/me/edit" element={<UserEditDetails />} >
-					<Route path="password" element={<AddPassword />} />
+					{/* <Route path="password" element={<AddPassword />} /> */}
 				</Route>
 
 				<Route path="adminpanel" element={<AdminPage />}>
