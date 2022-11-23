@@ -32,7 +32,6 @@ const addNewOrganizer = async (organizer) => {
 const getInudstries = async () => {
 	try {
 		const res = await axios.get(`${baseUrl}/adminpanel/industries`);
-		console.log(res);
 		return res;
 	} catch (e) {
 		console.log(e);

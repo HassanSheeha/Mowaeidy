@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { editOrganizerMe } from "../store/reducer/orgSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Alert, Col, Form, Row } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { organizerAPI } from "../API/AuthenticationAPI";
 
 export default function EditDetails() {
+	const navigate = useNavigate();
 	//----state is carrying the data from orgDetails
 	const { state } = useLocation();
 	const navigator = useNavigate();
@@ -15,56 +16,35 @@ export default function EditDetails() {
 	const dispatch = useDispatch();
 
 	//----Handling data from Inputs
-
-	const [formData, setFormData] = useState({
-		name: state ? state.orgName : "",
-		title: state ? state.title : "",
-		industry: state ? state.industryIDFK?.name : "",
-		description: state ? state.description : "",
-		contact: state ? state.contact : {},
-		imgSrc: state ? state.userIDFK?.profilePicture : "",
-	});
-	const [errorMessage, setErrorMessage] = useState({
-		name: "",
-		title: "",
-		industry: "",
-		description: "",
-		contact: {},
-		imgSrc: "",
-	});
-
-	////new
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const { addNewOrganizer, getInudstries } = organizerAPI;
+	const { getInudstries } = organizerAPI;
 	const [industries, setIndusrty] = useState();
 	const [individual, setIndivdual] = useState(false);
 	const [industryIDFK, setIndustryIDFK] = useState();
-	const [allowPayment, setAllowPayment] = useState(false);
-	const [msg, setMsg] = useState("");
-	const [alert, setAlert] = useState();
+	const [allowPayment, setAllowPayment] = useState(
+		state?.industryIDFK?.allowPayment
+	);
 
 	const [availHours, setAvailHours] = useState({
-		startTime: "",
-		endTime: "",
+		startTime: state?.availHours?.startTime,
+		endTime: state?.availHours?.endTime,
 	});
 	const [contact, setContact] = useState({
-		phone: "",
-		anthorPhone: "",
-		orgEmail: "",
+		phone: state?.contact?.phone,
+		anthorPhone: state?.contact?.anthorPhone,
+		orgEmail: state?.contact?.orgEmail,
 	});
-	const [days, setDays] = useState({
-		sat: 7,
-		sun: 7,
-		mon: 7,
-		tue: 7,
-		wed: 7,
-		thu: 7,
-		fri: 7,
-	});
+	const [satVal, setSatVal] = useState(7);
+	const [sunVal, setSunVal] = useState(7);
+	const [monVal, setMonVal] = useState(7);
+	const [tueVal, setTueVal] = useState(7);
+	const [wedVal, setWedVal] = useState(7);
+	const [thuVal, setThuVal] = useState(7);
+	const [friVal, setFriVal] = useState(7);
 	const [satChecked, setSatChecked] = useState(false);
 	const [sunChecked, setSunChecked] = useState(false);
 	const [monChecked, setMonChecked] = useState(false);
@@ -78,24 +58,31 @@ export default function EditDetails() {
 			switch (day) {
 				case 0:
 					setSunChecked(true);
+					setSunVal(0);
 					break;
 				case 1:
 					setMonChecked(true);
+					setMonVal(1);
 					break;
 				case 2:
 					setTueChecked(true);
+					setTueVal(2);
 					break;
 				case 3:
 					setWedChecked(true);
+					setWedVal(3);
 					break;
 				case 4:
 					setThuChecked(true);
+					setThuVal(4);
 					break;
 				case 5:
 					setFriChecked(true);
+					setFriVal(5);
 					break;
 				case 6:
 					setSatChecked(true);
+					setSatVal(6);
 					break;
 				default:
 					break;
@@ -104,26 +91,22 @@ export default function EditDetails() {
 	};
 	const [daysError, setDaysError] = useState(false);
 	const phoneHandler = (e) => {
-		console.log(e.target.value);
 		if (e.target.value !== null) {
 			setContact({ ...contact, phone: e.target.value });
 		}
 	};
 	const anthorPhoneHandler = (e) => {
-		console.log(e.target.value);
 		if (e.target.value !== null) {
 			setContact({ ...contact, anthorPhone: e.target.value });
 		}
 	};
 	const orgEmailHandler = (e) => {
-		console.log(e.target.value);
 		if (e.target.value !== null) {
 			setContact({ ...contact, orgEmail: e.target.value });
 		}
 	};
 
 	const startTimeHandler = (e) => {
-		console.log(e.target.value);
 		if (e.target.value !== null) {
 			setAvailHours({ ...availHours, startTime: e.target.value });
 		}
@@ -142,24 +125,31 @@ export default function EditDetails() {
 			console.log(e);
 		}
 	};
+	let availDays = [satVal, sunVal, monVal, tueVal, wedVal, thuVal, friVal];
+
 	const daysHandler = (e) => {
 		setDaysError(false);
-		let dayName = e.target.name;
-		if (e.target.checked) {
-			setDays({ ...days, [dayName]: parseInt(e.target.value) });
-		} else {
-			setDays({ ...days, [dayName]: 7 });
+		if (availDays.length === 0) {
+			setDaysError(true);
+		}
+		availDays = availDays.filter((k) => {
+			return k !== 7;
+		});
+		if (e) {
+			if (e.target.checked) {
+				availDays.push(parseInt(e.target.value));
+			} else {
+				availDays.splice(availDays.indexOf(parseInt(e.target.value)), 1);
+			}
 		}
 	};
 	const industryHandler = (e) => {
 		let selectedIndustry = e.target.value;
 		setIndustryIDFK(selectedIndustry);
-
 		industries.map((industry) => {
 			if (industry._id === selectedIndustry) {
 				setAllowPayment(industry.allowPayment);
 			}
-			return industry;
 		});
 	};
 	const indvidualHandler = (e) => {
@@ -170,134 +160,64 @@ export default function EditDetails() {
 		}
 	};
 
-	// const onSubmit = (data) => {
-	// 	let userIDFK = id;
-	// 	let availDays = [];
-	// 	let keys = Object.keys(days);
-	// 	keys.map((key) => {
-	// 		if (days[key] !== 7) {
-	// 			availDays.push(days[key]);
-	// 			console.log(availDays);
-	// 		}
-	// 		return days;
-	// 	});
-	// 	const { amountOfRequiredDaposit, description, orgName, title } = data;
-	// 	const newOrganizer = {
-	// 		amountOfRequiredDaposit,
-	// 		description,
-	// 		orgName,
-	// 		title,
-	// 		individual,
-	// 		contact,
-	// 		availHours,
-	// 		availDays,
-	// 		industryIDFK,
-	// 		userIDFK,
-	// 	};
-	// 	if (availDays.length === 0) {
-	// 		setDaysError(true);
-	// 	} else {
-	// 		add(newOrganizer);
-	// 		console.log(newOrganizer);
-	// 	}
-	// };
+	const onSubmit = (data) => {
+		daysHandler();
+
+		const { amountOfRequiredDaposit, question, description, orgName, title } =
+			data;
+		let editedOrganizer;
+		if (allowPayment) {
+			editedOrganizer = {
+				amountOfRequiredDaposit,
+				description,
+				orgName,
+				title,
+				contact,
+				availHours,
+				availDays,
+				individual,
+				industryIDFK,
+				question,
+			};
+		} else {
+			editedOrganizer = {
+				description,
+				orgName,
+				title,
+				contact,
+				availHours,
+				availDays,
+				individual,
+				industryIDFK,
+				question,
+			};
+		}
+		if (availDays.length !== 0) {
+			add(editedOrganizer);
+			console.log(editedOrganizer);
+		} else {
+		}
+	};
 
 	useEffect(() => {
 		getAllIndustries();
 		checkedDays();
-	}, []);
+	}, [state]);
 	///
 
-	const [isEdited, setIsEdited] = useState(false);
 
-	//----Validating and accepting data from Inputs
-	const changeHandler = (e) => {
-		if (!isEdited) setIsEdited(true);
-		switch (e.target.name) {
-			case "contact.orgEmail":
-				if (e.target.value.length > 0) {
-					setFormData({
-						...formData,
-						contact: { ...formData.contact, orgEmail: e.target.value },
-					});
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "", //!!!
-					});
-				} else {
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "Input field is required",
-					});
-				}
-				break;
-			case "contact.phone":
-				if (e.target.value.length > 0) {
-					setFormData({
-						...formData,
-						contact: { ...formData.contact, phone: e.target.value },
-					});
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "", //!!!
-					});
-				} else {
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "Input field is required",
-					});
-				}
-				break;
-			case "contact.anthorPhone":
-				if (e.target.value.length > 0) {
-					setFormData({
-						...formData,
-						contact: { ...formData.contact, anthorPhone: e.target.value },
-					});
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "", //!!!
-					});
-				} else {
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "Input field is required",
-					});
-				}
-				break;
-
-			default:
-				if (e.target.value.length > 0) {
-					setFormData({
-						...formData,
-						[e.target.name]: e.target.value,
-					});
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "",
-					});
-				} else {
-					setErrorMessage({
-						...errorMessage,
-						[e.target.name]: "Input field is required",
-					});
-				}
-				break;
-		}
-	};
-
+		
 	//----Button fires Action to edit
-	const submitHandler = (e) => {
+	const add = (editedOrganizer) => {
 		if (state) {
 			let idArg = state._id;
-			let orgArg = formData; //new organizer from add
+			let orgArg = editedOrganizer;
 			dispatch(editOrganizerMe({ idArg, orgArg })); //args names must match the names in CRUD
 		} else {
-			console.log("Not Authorized to Edit to Database"); //!!!
-			console.log(formData);
+			console.log("Not Authorized to Edit to Database");
 		}
 		setTimeout(() => {
-			navigator(-1);
+			// navigator(-1);
 		}, 3000);
 	};
 
@@ -306,33 +226,18 @@ export default function EditDetails() {
 			<Form
 				noValidate
 				className="p-5 text-dark"
-				onSubmit={handleSubmit(submitHandler)}
-				onChange={changeHandler}
+				onSubmit={handleSubmit(onSubmit)}
+				// onChange={changeHandler}
 			>
 				<div className="container border rounded-5 border-2 border-dark">
 					<div className="row p-3 pb-0 d-flex w-100 justify-content-between">
 						<div className="col-lg-3 col-md-5 col-8">
 							<img
-								src={formData.imgSrc}
+								src={state?.userIDFK?.profilePicture}
 								width="180"
 								height="180"
 								className="border border-warning rounded-circle shadow"
 							/>
-							<Form.Label
-								className="mt-3 text-dark fw-semibold"
-								htmlFor="orgImgSrc"
-							>
-								Picture URL <FaEdit className="ms-2 fs-5 mb-1" />
-							</Form.Label>
-							<Form.Control
-								name="imgSrc"
-								type="url"
-								id="orgImgSrc"
-								className="form-control fs-6 bg-transparent border-0 mb-3 text-primary rounded-pill"
-								defaultValue={formData.imgSrc}
-								placeholder="Enter Picture URL"
-							/>
-							<div className="text-danger">{errorMessage.imgSrc}</div>
 						</div>
 
 						<div className="col-lg-9 col-md-7 col-12">
@@ -464,14 +369,48 @@ export default function EditDetails() {
 									{industries &&
 										industries.map((indusrty, index) => {
 											return (
-												<option value={indusrty._id} key={index}>
+												<option
+													selected={
+														indusrty._id === state?.industryIDFK?._id
+															? "selected"
+															: null
+													}
+													value={indusrty._id}
+													key={index}
+												>
 													{indusrty?.name}
 												</option>
 											);
 										})}
 								</Form.Select>
 							</div>
-							<div className="text-danger">{errorMessage.industry}</div>
+							{allowPayment && (
+								<div className="my-4 fw-semibold text-dark">
+									<Form.Label
+										className="text-warning fw-semibold"
+										htmlFor="allowPayment"
+									>
+										Minimun Salary:
+									</Form.Label>
+									<Form.Control
+										id="allowPayment"
+										placeholder="Enter your minimun salary"
+										type="text"
+										name="amountOfRequiredDaposit"
+										className="form-control text-center mt-2 border-0 text-primary rounded-pill"
+										{...register("amountOfRequiredDaposit", {
+											value: state?.amountOfRequiredDaposit,
+											required: "please specify your salary",
+										})}
+									></Form.Control>
+									{errors.amountOfRequiredDaposit && (
+										<p className="text-danger fw-semibold">
+											{errors.amountOfRequiredDaposit?.message}
+										</p>
+									)}
+								</div>
+							)}
+
 							<hr />
 
 							<div className="my-3 fw-semibold text-warning">
@@ -497,6 +436,7 @@ export default function EditDetails() {
 												message: "Please Enter Valid Email",
 											},
 										})}
+										onChange={orgEmailHandler}
 									/>
 								</div>
 								{errors.orgEmail && (
@@ -525,6 +465,7 @@ export default function EditDetails() {
 												message: "Please enter a valid Phone number",
 											},
 										})}
+										onChange={phoneHandler}
 									/>
 								</div>
 								{errors.Phone && (
@@ -552,6 +493,7 @@ export default function EditDetails() {
 												message: "Please enter a valid Phone number",
 											},
 										})}
+										onChange={anthorPhoneHandler}
 									/>
 								</div>
 								{errors.anthorPhone && (
@@ -560,10 +502,42 @@ export default function EditDetails() {
 									</p>
 								)}
 								<hr className="my-4" />
+								<div className="text-dark text-start">
+									<Form.Label
+										className="text-primary fw-semibold"
+										htmlFor="ques"
+									>
+										Question To Your Client
+									</Form.Label>
+									<textarea
+										id="ques"
+										class="field"
+										placeholder="Write Your Question"
+										className="form-control text-center mt-2 border-0 text-primary rounded"
+										{...register("question", {
+											value: state?.question,
+										})}
+										rows={3}
+									></textarea>
+								</div>
+								<div className="text-dark text-center">
+									<Form.Label
+										className="text-primary fw-semibold"
+										htmlFor="ind"
+									>
+										Indvidual
+										<input
+											type="checkbox"
+											id="ind"
+											onChange={indvidualHandler}
+											defaultChecked={state?.individual ? "true" : null}
+											className="ch1"
+										></input>
+									</Form.Label>
+								</div>
 							</div>
 						</div>
 						<div className="vr p-0"></div>
-
 						<div className="col">
 							<h4 className="my-4 text-dark">Calender</h4>
 							<div>
@@ -580,7 +554,7 @@ export default function EditDetails() {
 												value={6}
 												className="ch1 mx-2"
 												defaultChecked={satChecked ? "true" : null}
-												onChange={daysHandler}
+												onClick={daysHandler}
 											></input>
 											Saturday
 										</p>
@@ -594,7 +568,7 @@ export default function EditDetails() {
 												value={0}
 												defaultChecked={sunChecked ? "true" : null}
 												className="ch1 mx-2"
-												onChange={daysHandler}
+												onClick={daysHandler}
 											></input>
 											Sunday
 										</p>
@@ -608,7 +582,7 @@ export default function EditDetails() {
 												value={1}
 												className="ch1 mx-2"
 												defaultChecked={monChecked ? "true" : null}
-												onChange={daysHandler}
+												onClick={daysHandler}
 											></input>
 											Monday
 										</p>
@@ -622,7 +596,7 @@ export default function EditDetails() {
 												value={2}
 												className="ch1 mx-2"
 												defaultChecked={tueChecked ? "true" : null}
-												onChange={daysHandler}
+												onClick={daysHandler}
 											></input>
 											Tuesday
 										</p>
@@ -636,7 +610,7 @@ export default function EditDetails() {
 												value={3}
 												className="ch1 mx-2"
 												defaultChecked={wedChecked ? "true" : null}
-												onChange={daysHandler}
+												onClick={daysHandler}
 											></input>
 											Wednesday
 										</p>
@@ -649,7 +623,7 @@ export default function EditDetails() {
 												name="thu"
 												value={4}
 												className="ch1 mx-2"
-												onChange={daysHandler}
+												onClick={daysHandler}
 												defaultChecked={thuChecked ? "true" : null}
 											></input>
 											Thursday
@@ -663,7 +637,7 @@ export default function EditDetails() {
 												value={5}
 												className="ch1 mx-2"
 												defaultChecked={friChecked ? "true" : null}
-												onChange={daysHandler}
+												onClick={daysHandler}
 											></input>
 											Friday
 										</p>
@@ -722,21 +696,19 @@ export default function EditDetails() {
 					</div>
 				</div>
 
-				{isEdited && (
-					<div className="row pt-5">
-						<button
-							className={
-								state
-									? "col-lg-2 col-md-3 col-4 btn btn-primary rounded-pill fw-semibold mx-auto text-warning"
-									: "disabled invisible"
-							}
-							name="edit"
-						>
-							{" "}
-							{state ? "Save Changes" : "---"}
-						</button>
-					</div>
-				)}
+				<div className="row pt-5">
+					<button
+						className={
+							state
+								? "col-lg-2 col-md-3 col-4 btn btn-primary rounded-pill fw-semibold mx-auto text-warning"
+								: "disabled invisible"
+						}
+						name="edit"
+					>
+						{" "}
+						{state ? "Save Changes" : "---"}
+					</button>
+				</div>
 			</Form>
 
 			{editedOrg && (
