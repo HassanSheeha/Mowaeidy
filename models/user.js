@@ -22,7 +22,6 @@ const userSchema = new mongoose.Schema({
 	},
 	dateOfBirth: {
 		type: Date,
-		
 	},
 	password: {
 		type: String,

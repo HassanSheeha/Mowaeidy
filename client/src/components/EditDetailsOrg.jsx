@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { organizerAPI } from "../API/AuthenticationAPI";
 
 export default function EditDetails() {
-	const navigate = useNavigate();
 	//----state is carrying the data from orgDetails
 	const { state } = useLocation();
 	const navigator = useNavigate();
@@ -205,8 +204,6 @@ export default function EditDetails() {
 	}, [state]);
 	///
 
-
-		
 	//----Button fires Action to edit
 	const add = (editedOrganizer) => {
 		if (state) {
@@ -217,7 +214,7 @@ export default function EditDetails() {
 			console.log("Not Authorized to Edit to Database");
 		}
 		setTimeout(() => {
-			// navigator(-1);
+			navigator(-1);
 		}, 3000);
 	};
 
@@ -268,7 +265,7 @@ export default function EditDetails() {
 							/>
 							{errors.orgName && (
 								<p className="text-warning mt-3 fw-semibold">
-									{errors.orgName.message}
+									{errors?.orgName?.message}
 								</p>
 							)}
 							<Form.Label
