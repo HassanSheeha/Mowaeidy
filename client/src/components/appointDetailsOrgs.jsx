@@ -157,7 +157,10 @@ export default function OrgAppointDetails({ organizer }) {
 											{appoint?.madeByFK?.firstName}{" "}
 											{appoint?.madeByFK?.lastName}{" "}
 										</span>
-										has booked an appointment with you.
+										has booked an appointment with you about
+										<span className="text-primary fw-bold mx-1">
+											{appoint?.description}{" "}
+										</span>
 									</div>
 									<div className="my-3">
 										- Appointment is
@@ -227,6 +230,15 @@ export default function OrgAppointDetails({ organizer }) {
 												and it's a
 												<span className="text-primary fw-bold mx-1">
 													group meeting
+												</span>
+											</>
+										)}
+										{appoint?.answer && (
+											<>
+												{" "}
+												and the answer to your question is
+												<span className="text-primary fw-bold mx-1">
+													{appoint?.answer}
 												</span>
 											</>
 										)}

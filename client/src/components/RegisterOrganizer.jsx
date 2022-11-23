@@ -136,7 +136,8 @@ export default function RegisterOrganizer() {
 			}
 			return days;
 		});
-		const { amountOfRequiredDaposit,question , description, orgName, title } = data;
+		const { amountOfRequiredDaposit, question, description, orgName, title } =
+			data;
 		const newOrganizer = {
 			amountOfRequiredDaposit,
 			description,
@@ -286,15 +287,14 @@ export default function RegisterOrganizer() {
 						{/** orgEmail and description */}
 						<Row className="row mx-5 mt-2">
 							<Col sm={12} lg={6} className="">
-								<label className="label">
-									Org E-mail <span className="option2 mx-2">(optional)</span>
-								</label>
+								<label className="label">Org E-mail</label>
 								<Form.Control
 									placeholder="ITI@ddd.com"
 									type="email"
 									name="orgEmail"
 									className="fields"
 									{...register("orgEmail", {
+										required: "Email is required",
 										pattern: {
 											value:
 												/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -530,7 +530,18 @@ export default function RegisterOrganizer() {
 										className="text"
 										name="question"
 										rows={3}
+										{...register("question", {
+											maxLength: {
+												value: 100,
+												messsage: "question must be less than 100 character",
+											},
+										})}
 									></textarea>
+									{errors.question && (
+										<p className="text-danger fw-semibold">
+											{errors.question?.message}
+										</p>
+									)}
 									<p className=" label mt-5">
 										Indvidual
 										<input

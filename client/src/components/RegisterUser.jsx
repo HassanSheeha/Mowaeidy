@@ -94,7 +94,7 @@ export default function RegisterUser() {
 	};
 	const add = async (data) => {
 		console.log(data);
-		console.log(typeof(data.dateOfBirth))
+		console.log(typeof data.dateOfBirth);
 		let newUser = { ...data, organizer: check };
 		try {
 			let res = await addNewUser(newUser);
@@ -110,7 +110,7 @@ export default function RegisterUser() {
 				setMsg("user added");
 				setAlert(true);
 				setTimeout(() => {
-					//navigate("/home");
+					navigate("/home");
 				}, 3000);
 			}
 		} catch (error) {
@@ -139,7 +139,7 @@ export default function RegisterUser() {
 					</div>
 					<Form onSubmit={handleSubmit(onSubmit)}>
 						<Row className="row mx-5">
-							<Col sm={12} lg={6} >
+							<Col sm={12} lg={6}>
 								<span className="label">First Name</span>
 								<Form.Control
 									className="fields"
@@ -353,20 +353,20 @@ export default function RegisterUser() {
 							</Col>
 						</Row>
 						<Row className="mx-5 mt-4">
-							<Col sm={12} lg={6}className="">
+							<Col sm={12} lg={6} className="">
 								<label className="label">Date Of Birth</label>
 								<Form.Control
 									placeholder="write strong passcode"
 									type="date"
 									name="dateOfBirth"
 									className="fields"
-								{...register('dateOfBirth' , {
-
-								})}
+									{...register("dateOfBirth", {})}
 								/>
-								{errors?.dateOfBirth && (<p className="text-danger">{errors?.dateOfBirth?.message}</p>)}
+								{errors?.dateOfBirth && (
+									<p className="text-danger">{errors?.dateOfBirth?.message}</p>
+								)}
 							</Col>
-							<Col sm={12} lg={6}className="mt-lg-0 align-self-end mt-3">
+							<Col sm={12} lg={6} className="mt-lg-0 align-self-end mt-3">
 								<p className=" check1 fs-6 ">
 									Sign up as an
 									<span className="check">ORGANIZER</span> ?
@@ -383,9 +383,9 @@ export default function RegisterUser() {
 						<Row className="row mx-5 my-4 d-flex">
 							<Col sm={12} lg={6}>
 								<p className="already">
-									Already have an account? 
+									Already have an account?
 									<a className="login" href="#" onClick={loginRefHandler}>
-									{"	LOGIN"}
+										{"	LOGIN"}
 									</a>
 								</p>
 							</Col>

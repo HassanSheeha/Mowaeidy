@@ -53,7 +53,7 @@ const organizerSignUpValidation = {
 			contact: Joi.object().keys({
 				phone: Joi.string().required(),
 				anthorPhone: Joi.string().empty('').allow(''),
-				orgEmail: Joi.string().email().empty('').allow(''),
+				orgEmail: Joi.string().email().required(),
 			}),
 			industryIDFK: Joi.string().hex().length(24),
 			question: Joi.string().empty('').allow(''),

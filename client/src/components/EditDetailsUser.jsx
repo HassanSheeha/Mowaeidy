@@ -60,21 +60,18 @@ export default function UserEditDetails() {
 			console.log("Not Authorized to Edit to Database"); //!!!
 		}
 		setTimeout(() => {
-			// navigator(-1);
+			navigator(-1);
 		}, 3000);
 	};
-	
+
 	const onSubmit = (data) => {
-		let editedUser={...data}
+		let editedUser = { ...data };
 		editUser(editedUser);
 		console.log(editedUser);
 	};
 	return (
 		<div className="bg-light mt-5">
-			<Form
-				className="p-5 text-dark"
-				onSubmit={handleSubmit(onSubmit)}
-			>
+			<Form className="p-5 text-dark" onSubmit={handleSubmit(onSubmit)}>
 				<div className="container border rounded-5 border-2 border-dark">
 					<div className="row p-3 pb-0 d-flex w-100 justify-content-between">
 						<div className="col-lg-3 col-md-5 col-8">

@@ -26,7 +26,6 @@ export default function ProfileDetails() {
 	);
 	const dispatch = useDispatch();
 	const { state, pathname } = useLocation();
-
 	//----Differentiate between organizer/view & organizer/me
 	let path = pathname.slice(11);
 	let orgId = state;
@@ -243,6 +242,18 @@ export default function ProfileDetails() {
 											Rating:
 											<h5 className="text-white text-center my-3">
 												{organizer?.rate} / 10
+											</h5>
+										</div>
+										<div className="my-3 fw-semibold text-warning">
+											question:
+											<h5 className="text-white text-center my-3">
+												{organizer?.question}
+											</h5>
+										</div>
+										<div className="my-3 fw-semibold text-warning">
+											individual:
+											<h5 className="text-white text-center my-3">
+												{organizer?.individual ? "Yes" : "No"}
 											</h5>
 										</div>
 										{/* add any more data you want here */}
