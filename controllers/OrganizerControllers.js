@@ -98,7 +98,10 @@ const getAllAppointmentOrganizer = async (req, res) => {
 		const foundAppointment = await appointmentModel
 			.find({ madeToFK: req.query.id })
 			.select("-userFeedback -madeToFK -organiserFeedback")
-			.populate({ path: "madeByFK", select: "firstName lastName phone" })
+			.populate({
+				path: "madeByFK",
+				select: "firstName lastName phone email city",
+			})
 			.populate({ path: "industryIDFK", select: "name" })
 			.exec();
 		if (!foundAppointment) {

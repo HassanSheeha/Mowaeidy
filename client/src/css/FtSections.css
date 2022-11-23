@@ -9,6 +9,7 @@
 	height: 100%;
 	object-fit: contain;
 	transform: rotateZ(30deg);
+	z-index: -17;
 }
 @media screen and (max-width: 600px) {
 	.sec-image-reminder {
@@ -36,7 +37,7 @@
 .main-appo {
 	height: fit-content;
 	background-image: url("/public/Assets/Images/mainAppointmentBG.png");
-	background-size:  100% auto;
+	background-size: 100% auto;
 	background-repeat: no-repeat;
 	background-position: center;
 }

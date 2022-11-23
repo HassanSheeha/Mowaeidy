@@ -131,7 +131,9 @@ export default function OrgAppointDetails({ organizer }) {
 										<div className="fw-semibold my-1">
 											At:{" "}
 											<span className="text-primary fw-bold mx-2">
-												{appoint?.appDateTime}
+												{appoint?.appStartDateTime.slice(11, 16)}
+												{" on "}
+												{appoint?.appStartDateTime.slice(0, 10)}
 											</span>
 										</div>
 										<div className="fw-semibold mt-1">
@@ -156,7 +158,6 @@ export default function OrgAppointDetails({ organizer }) {
 											{appoint?.madeByFK?.lastName}{" "}
 										</span>
 										has booked an appointment with you.
-										{/* <NavLink to={`/user/view`} state={appoint?.madeByFK?.id} className="btn btn-primary py-0 px-2 mx-2 rounded-pill">View Profile</NavLink> */}
 									</div>
 									<div className="my-3">
 										- Appointment is
@@ -194,8 +195,9 @@ export default function OrgAppointDetails({ organizer }) {
 									<div className="my-3">
 										- Appointment is at
 										<span className="text-primary fw-bold mx-1">
-											{" "}
-											{appoint?.appDateTime}{" "}
+											{appoint?.appStartDateTime.slice(11, 16)}
+											{" on "}
+											{appoint?.appStartDateTime.slice(0, 10)}
 										</span>
 										and final allowed time to cancel is
 										<span className="text-primary fw-bold mx-1">
@@ -212,10 +214,9 @@ export default function OrgAppointDetails({ organizer }) {
 									<div className="my-3">
 										- Appointment is
 										<span className="text-primary fw-bold mx-1">
-											{" "}
-											{appoint?.online}{" "}
+											{appoint?.online ? "online " : "offline "}
 										</span>
-										in
+										{"in "}
 										<span className="text-primary fw-bold mx-1">
 											{" "}
 											{appoint?.place}{" "}
@@ -223,10 +224,9 @@ export default function OrgAppointDetails({ organizer }) {
 										{appoint?.group && (
 											<>
 												{" "}
-												and it's a/an
+												and it's a
 												<span className="text-primary fw-bold mx-1">
-													{" "}
-													{appoint?.group}
+													group meeting
 												</span>
 											</>
 										)}
@@ -243,7 +243,7 @@ export default function OrgAppointDetails({ organizer }) {
 										<div>
 											{appoint?.madeByFK?.email && (
 												<>
-													<FaEnvelope className="fs-5 ms-4 me-2 text-dark" />
+													<FaEnvelope className="fs-5 ms-4 me-2 text-warning" />
 													<a
 														className="text-primary fw-bold fs-6 me-3"
 														target="_blank"
@@ -253,23 +253,11 @@ export default function OrgAppointDetails({ organizer }) {
 													</a>
 												</>
 											)}
-											{appoint?.madeByFK?.email2 && (
-												<>
-													<FaEnvelope className="fs-5 ms-4 me-2 text-dark" />
-													<a
-														className="text-primary fw-bold fs-6 me-3"
-														target="_blank"
-														href={`mailto:${appoint?.madeByFK?.email2}`}
-													>
-														{appoint?.madeByFK?.email2}
-													</a>
-												</>
-											)}
 										</div>
 										<div>
 											{appoint?.madeByFK?.phone && (
 												<>
-													<FaPhoneSquareAlt className="fs-5 ms-4 me-2 text-dark" />
+													<FaPhoneSquareAlt className="fs-5 ms-4 me-2 text-warning" />
 													<a
 														className="text-primary fw-bold fs-6 me-3"
 														target="_blank"
@@ -279,49 +267,11 @@ export default function OrgAppointDetails({ organizer }) {
 													</a>
 												</>
 											)}
-											{appoint?.madeByFK?.phone2 && (
-												<>
-													<FaPhoneSquareAlt className="fs-5 ms-4 me-2 text-dark" />
-													<a
-														className="text-primary fw-bold fs-6 me-3"
-														target="_blank"
-														href={`tel:+${appoint?.madeByFK?.phone2}`}
-													>
-														{appoint?.madeByFK?.phone2}
-													</a>
-												</>
-											)}
-										</div>
-										<div>
-											{appoint?.madeByFK?.facebook && (
-												<>
-													<FaFacebookSquare className="fs-5 ms-4 me-2 text-dark" />
-													<a
-														className="text-primary fw-bold fs-6 me-3"
-														target="_blank"
-														href={`${appoint?.madeByFK?.facebook}`}
-													>
-														Facebook Profile
-													</a>
-												</>
-											)}
-											{appoint?.madeByFK?.linkedin && (
-												<>
-													<FaLinkedin className="fs-5 ms-4 me-2 text-dark" />
-													<a
-														className="text-primary fw-bold fs-6"
-														target="_blank"
-														href={`${appoint?.madeByFK?.linkedin}`}
-													>
-														LinkedIn Profile
-													</a>
-												</>
-											)}
 										</div>
 										<div>
 											{appoint?.madeByFK?.city && (
 												<>
-													<FaMapMarkerAlt className="fs-5 ms-4 me-2 text-dark" />
+													<FaMapMarkerAlt className="fs-5 ms-4 me-2 text-warning" />
 													<span className="text-primary fw-bold fs-6 me-3">
 														{appoint?.madeByFK?.city}
 													</span>
