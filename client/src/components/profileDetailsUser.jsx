@@ -24,7 +24,6 @@ export default function UserProfileDetails() {
 	//----Differentiate between user/view & user/me
 
 	let path = pathname.slice(6);
-	console.log(user);
 	let userId = state;
 	let inMe = false;
 	if (path === "me") {

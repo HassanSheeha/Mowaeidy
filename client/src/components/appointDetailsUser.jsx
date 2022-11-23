@@ -20,14 +20,17 @@ export default function UserAppointDetails({ user }) {
 		(state) => state.appointReducer
 	);
 	const dispatch = useDispatch();
+	const [renderChanges, setRenderChanges] = useState(0); //just to rerender the changes by actions
+
 	useEffect(() => {
 		dispatch(getAllAppointmentsUser(user?._id));
 		// eslint-disable-next-line
-	}, []);
+	}, [renderChanges]);
 
 	const cancelHandler = (appointId) => {
-		// event.stopPropagation()
 		dispatch(deleteAppointmentUser(appointId));
+		setRenderChanges(renderChanges + 1);
+
 		// fire a send email event to --> madeByFK
 		// popup to inquire about cancel reason or send a certain message to the user?!
 		// toastify success after

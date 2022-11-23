@@ -74,13 +74,18 @@ const addAppointmentOrganizer = async (req, res) => {
 		const newAppointment = new appointmentModel(req.body);
 		const savedAppointment = await newAppointment.save();
 
-		const fromUser = await userModel.findOne({ _id: savedAppointment.madeByFK }).select("firstName lastName").exec();
-		const toOrg = await organzierModel.findOne({ _id: savedAppointment.madeToFK }).select("email").exec();
-		const emailMessage = 
-		`<div style='background-color:#2e5077;padding:25px;color:white;'>
+		const fromUser = await userModel
+			.findOne({ _id: savedAppointment.madeByFK })
+			.select("firstName lastName")
+			.exec();
+		const toOrg = await organzierModel
+			.findOne({ _id: savedAppointment.madeToFK })
+			.select("contact")
+			.exec();
+		const emailMessage = `<div style='background-color:#2e5077;padding:25px;color:white;'>
 			<h3><span style='color:#ffa630;'>${fromUser.firstName} ${fromUser.lastName}</span> has booked an appointment with you at <span style='color:#ffa630;'>${savedAppointment.appStartDateTime}.</span></h3>
 		</div>`;
-		sendEmail(toOrg.email, emailMessage);
+		sendEmail(toOrg?.contact?.orgEmail, emailMessage);
 
 		res.json({ message: "done", savedAppointment });
 	} catch (err) {
@@ -96,11 +101,15 @@ const editAppointmentStatus = async (req, res) => {
 			.findOneAndUpdate({ _id: req.query.id }, { status })
 			.exec();
 		if (updatedAppointment) {
-
-			const fromOrg = await organzierModel.findOne({ _id: updatedAppointment.madeToFK }).select("orgName").exec();
-			const toUser = await userModel.findOne({ _id: updatedAppointment.madeByFK }).select("email").exec();
-			const emailMessage = 
-			`<div style='background-color:#2e5077;padding:25px;color:white;'>
+			const fromOrg = await organzierModel
+				.findOne({ _id: updatedAppointment.madeToFK })
+				.select("orgName contact")
+				.exec();
+			const toUser = await userModel
+				.findOne({ _id: updatedAppointment.madeByFK })
+				.select("email")
+				.exec();
+			const emailMessage = `<div style='background-color:#2e5077;padding:25px;color:white;'>
 				<h3><span style='color:#ffa630;'>${fromOrg.orgName}</span> has confirmed your appointment at <span style='color:#ffa630;'>${updatedAppointment.appStartDateTime}.</span></h3>
 			</div>`;
 			sendEmail(toUser.email, emailMessage);
@@ -108,7 +117,7 @@ const editAppointmentStatus = async (req, res) => {
 			res.json({ message: "appointment updated" });
 		} else {
 			res.json({ message: "appointment doesn't exist" });
-		} 
+		}
 	} catch (err) {
 		res.json({ message: "error" });
 	}
