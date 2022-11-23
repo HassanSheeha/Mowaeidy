@@ -1,4 +1,6 @@
-const Joi = require("joi");
+//const Joi = require("joi");
+const Joi = require('joi')
+    .extend(require('@joi/date'));
 const singUpValidation = {
 	body: Joi.object()
 		.required()
@@ -17,6 +19,7 @@ const singUpValidation = {
 			city: Joi.string().required(),
 			phone: Joi.string().required(),
 			gender: Joi.string().required(),
+			dateOfBirth: Joi.date().format('YYYY-MM-DD').utc().empty('').allow(''), 
 			organizer: Joi.boolean().required(),
 			role: Joi.string(),
 		}),
@@ -38,10 +41,10 @@ const organizerSignUpValidation = {
 				.pattern(new RegExp("^[a-zA-Z0-9]{5,50}$"))
 				.required(),
 			description: Joi.string()
-				.pattern(new RegExp("^[a-zA-Z0-9]{20,500}$"))
+				.pattern(new RegExp("^[a-zA-Z0-9 ]{20,500}$"))
 				.required(),
 			individual: Joi.boolean().required(),
-			title: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{4,20}$")),
+			title: Joi.string().pattern(new RegExp("^[a-zA-Z0-9 ]{4,20}$")),
 			availDays: Joi.array().items(Joi.number().required()),
 			availHours: Joi.object().keys({
 				startTime: Joi.string().required(),
@@ -49,12 +52,13 @@ const organizerSignUpValidation = {
 			}),
 			contact: Joi.object().keys({
 				phone: Joi.string().required(),
-				anthorPhone: Joi.string(),
-				orgEmail: Joi.string().email(),
+				anthorPhone: Joi.string().empty('').allow(''),
+				orgEmail: Joi.string().email().empty('').allow(''),
 			}),
 			industryIDFK: Joi.string().hex().length(24),
-			question: Joi.string(),
+			question: Joi.string().empty('').allow(''),
 			amountOfRequiredDaposit: Joi.number(),
+
 		}),
 };
 module.exports = {

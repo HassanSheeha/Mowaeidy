@@ -15,6 +15,7 @@ const signUp = async (req, res) => {
 			phone,
 			city,
 			gender,
+			dateOfBirth,
 			role,
 			organizer,
 		} = req.body;
@@ -27,11 +28,14 @@ const signUp = async (req, res) => {
 			phone,
 			city,
 			gender,
+			dateOfBirth,
 			role,
 			organizer,
 		});
 		if (newUser.organizer == true) newUser.role = roles.organizer;
 		const savedUser = await newUser.save();
+		console.log(dateOfBirth)
+		console.log(savedUser.dateOfBirth)
 		const token = jwt.sign(
 			{ _id: savedUser._id, isLogged: true },
 			process.env.SIGNiNTOKEN,
@@ -109,6 +113,7 @@ const organizerSignUp = async (req, res) => {
 			availDays,
 			availHours,
 			amountOfRequiredDaposit,
+			question
 		} = req.body;
 		const newOrganizer = new OrganizerModel({
 			userIDFK,
@@ -121,6 +126,7 @@ const organizerSignUp = async (req, res) => {
 			availDays,
 			availHours,
 			amountOfRequiredDaposit,
+			question
 		});
 
 		const savedOrganizer = await newOrganizer.save();

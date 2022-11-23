@@ -58,6 +58,7 @@ export default function RegisterUser() {
 				const userId = res?.data?.savedUser?._id;
 				localStorage.setItem("userId", res?.data?.savedUser?._id);
 				localStorage.setItem("token", res?.data?.token);
+				localStorage.setItem("userId", res?.data?.savedUser?._id);
 				setMsg("user added");
 				setAlert(true);
 				setTimeout(() => {
@@ -93,6 +94,7 @@ export default function RegisterUser() {
 	};
 	const add = async (data) => {
 		console.log(data);
+		console.log(typeof(data.dateOfBirth))
 		let newUser = { ...data, organizer: check };
 		try {
 			let res = await addNewUser(newUser);
@@ -108,7 +110,7 @@ export default function RegisterUser() {
 				setMsg("user added");
 				setAlert(true);
 				setTimeout(() => {
-					navigate("/home");
+					//navigate("/home");
 				}, 3000);
 			}
 		} catch (error) {
@@ -356,9 +358,13 @@ export default function RegisterUser() {
 								<Form.Control
 									placeholder="write strong passcode"
 									type="date"
-									name="phone"
+									name="dateOfBirth"
 									className="fields"
+								{...register('dateOfBirth' , {
+
+								})}
 								/>
+								{errors?.dateOfBirth && (<p className="text-danger">{errors?.dateOfBirth?.message}</p>)}
 							</Col>
 							<Col sm={12} lg={6}className="mt-lg-0 align-self-end mt-3">
 								<p className=" check1 fs-6 ">
