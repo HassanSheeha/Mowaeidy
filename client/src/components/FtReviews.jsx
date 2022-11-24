@@ -16,7 +16,10 @@ export default function FtReviews() {
 						<p className="lead mt-4 ms-2 text-muted fw-bold">
 							Get the right feedback from Customers..
 						</p>
-						<NavLink to="/signUp" className="btn btn-primary btn-lg mt-5 px-5 pl-3 ">
+						<NavLink
+							to="/signUp"
+							className="btn btn-primary btn-lg mt-5 px-5 pl-3 "
+						>
 							Explore More Features
 						</NavLink>
 					</div>

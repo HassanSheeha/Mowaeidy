@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { BiUser } from "react-icons/bi";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-// import NavDropdown from "react-bootstrap/NavDropdown";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export default function NavBar() {
@@ -10,6 +9,8 @@ export default function NavBar() {
 	const navigate = useNavigate();
 	const logout = () => {
 		localStorage.removeItem("userId");
+		localStorage.removeItem("token");
+		localStorage.removeItem("adm");
 		navigate("/home");
 	};
 	useEffect(() => {
@@ -101,7 +102,7 @@ export default function NavBar() {
 						</Nav>
 					</Navbar.Collapse>
 					<Navbar.Brand className="pt-0">
-						{localStorage.getItem("userId") ? (
+						{localStorage.getItem("token") ? (
 							<Dropdown
 								menuVariant="primary"
 								title="profile"
@@ -115,14 +116,27 @@ export default function NavBar() {
 									Profile
 								</Dropdown.Toggle>
 								<Dropdown.Menu className="bg-primary text-center">
-									<NavLink
-										className={({ isActive }) =>
-											isActive ? "fs-3 text-white" : "fs-4 text-warning"
-										}
-										to="/user/me"
-									>
-										<BiUser className="border text-center border-2 rounded border-warning" />
-									</NavLink>
+									{localStorage.getItem("userId") ? (
+										<NavLink
+											className={({ isActive }) =>
+												isActive ? "fs-3 text-white" : "fs-4 text-warning"
+											}
+											to="/user/me"
+										>
+											<BiUser className="border text-center border-2 rounded border-warning" />
+										</NavLink>
+									) : (
+										localStorage.getItem("adm") && (
+											<NavLink
+												className={({ isActive }) =>
+													isActive ? "fs-3 text-white" : "fs-4 text-warning"
+												}
+												to="/adminpanel"
+											>
+												<BiUser className="border text-center border-2 rounded border-warning" />
+											</NavLink>
+										)
+									)}
 									<h6
 										className="fs-6 mx-4 mt-1 text-white pointer"
 										onClick={logout}

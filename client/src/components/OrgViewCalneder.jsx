@@ -63,7 +63,7 @@ export default function OrgViewCalneder({ organizer }) {
 	}, [isDone]);
 	// denay access to current organizer event
 	const setOrgAppointments = () => {
-		let appColor;
+		// eslint-disable-next-line
 		appointments?.map((oneApp) => {
 			setOrganizerEvents((organizerEvents) => [
 				...organizerEvents,

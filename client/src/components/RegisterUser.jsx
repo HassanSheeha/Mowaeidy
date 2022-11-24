@@ -241,6 +241,7 @@ export default function RegisterUser() {
 									{...register("email", {
 										required: "Email is Required",
 										pattern: {
+											// eslint-disable-next-line
 											value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
 											message: "Please enter a valid email",
 										},
@@ -384,6 +385,7 @@ export default function RegisterUser() {
 							<Col sm={12} lg={6}>
 								<p className="already">
 									Already have an account?
+									{/* eslint-disable-next-line */}
 									<a className="login" href="#" onClick={loginRefHandler}>
 										{"	LOGIN"}
 									</a>

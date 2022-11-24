@@ -3,8 +3,7 @@ const baseUrl = "http://localhost:5000";
 
 const addNewUser = async (user) => {
 	try {
-		const res = axios.post(`${baseUrl}/user/signUp`, user);
-		console.log(res);
+		const res = await axios.post(`${baseUrl}/user/signUp`, user);
 		return res;
 	} catch (error) {
 		console.log(error);
@@ -12,7 +11,7 @@ const addNewUser = async (user) => {
 };
 const loginUser = async (user) => {
 	try {
-		const res = axios.post(`${baseUrl}/user/signIn`, user);
+		const res = await axios.post(`${baseUrl}/user/signIn`, user);
 		console.log(res);
 		return res;
 	} catch (e) {
@@ -21,8 +20,10 @@ const loginUser = async (user) => {
 };
 const addNewOrganizer = async (organizer) => {
 	try {
-		const res = axios.post(`${baseUrl}/organizer/organizerSignUp`, organizer);
-		console.log(res);
+		const res = await axios.post(
+			`${baseUrl}/organizer/organizerSignUp`,
+			organizer
+		);
 		return res;
 	} catch (error) {
 		console.log(error);

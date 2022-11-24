@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { contactAPI } from "../API/ContactAPI";
 
 export default function ContactPage() {
+	const { sendMsg } = contactAPI;
 	const navigate = useNavigate();
 	const [isError, setIsError] = useState(true);
 	const [alert, setAlert] = useState(false);
+	const [alertBody, setAlertBody] = useState("");
 	const [formValues, setFormValues] = useState({
 		name: "",
 		email: "",
@@ -35,11 +38,21 @@ export default function ContactPage() {
 			setIsError(true);
 		}
 	};
+	const sendMessage = async () => {
+		const res = await sendMsg(formValues);
+		if (res?.data?.message === "message has been sent") {
+			setAlert(true);
+			setAlertBody("message sent we'll contact you soon");
+			setTimeout(() => {
+				navigate("/home");
+			}, 3000);
+		} else {
+			setAlert(true);
+			setAlertBody("something went wrong try again later");
+		}
+	};
 	const submit = () => {
-		setAlert(true);
-		setTimeout(() => {
-			navigate("/home");
-		}, 3000);
+		sendMessage();
 	};
 	let setErrorsFunc = (e) => {
 		setFormValues({
@@ -161,7 +174,7 @@ export default function ContactPage() {
 					className="position-fixed text-center mx-3 bottom-0 start-0 w-25"
 					variant="success"
 				>
-					Your message sent successfuly
+					{alertBody}
 				</Alert>
 			)}
 		</div>

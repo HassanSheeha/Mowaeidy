@@ -159,6 +159,7 @@ export default function RegisterOrganizer() {
 	};
 	useEffect(() => {
 		getAllIndustries();
+		// eslint-disable-next-line
 	}, []);
 
 	return (

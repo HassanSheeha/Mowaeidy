@@ -1,23 +1,16 @@
 import { Accordion } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	getAllAppointmentsOrg,
 	editAppointment,
 	deleteAppointmentOrg,
 } from "../store/reducer/appointSlice";
-import { Alert, Dropdown, DropdownButton } from "react-bootstrap";
-import {
-	FaFacebookSquare,
-	FaLinkedin,
-	FaPhoneSquareAlt,
-	FaEnvelope,
-	FaMapMarkerAlt,
-} from "react-icons/fa";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { FaPhoneSquareAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function OrgAppointDetails({ organizer }) {
-	const { appointments, isLoading, error } = useSelector(
+	const { appointments } = useSelector(
 		(state) => state.appointReducer
 	);
 	const dispatch = useDispatch();
@@ -258,6 +251,7 @@ export default function OrgAppointDetails({ organizer }) {
 													<FaEnvelope className="fs-5 ms-4 me-2 text-warning" />
 													<a
 														className="text-primary fw-bold fs-6 me-3"
+														rel="noreferrer"
 														target="_blank"
 														href={`mailto:${appoint?.madeByFK?.email}`}
 													>
@@ -272,6 +266,7 @@ export default function OrgAppointDetails({ organizer }) {
 													<FaPhoneSquareAlt className="fs-5 ms-4 me-2 text-warning" />
 													<a
 														className="text-primary fw-bold fs-6 me-3"
+														rel="noreferrer"
 														target="_blank"
 														href={`tel:+${appoint?.madeByFK?.phone}`}
 													>

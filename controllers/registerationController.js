@@ -72,7 +72,7 @@ const signIn = async (req, res) => {
 						res.json({ message: "take your token", token, userId: user._id });
 					}
 				} else {
-					res.json({ message: "user is pained please contact us" });
+					res.json({ message: "user is panned please contact us" });
 				}
 			}
 		} else {
@@ -92,7 +92,7 @@ const signIn = async (req, res) => {
 						{ expiresIn: "1h" }
 					);
 
-					res.json({ message: "take your token", token });
+					res.json({ message: "take your token", token ,adm:278440});
 				}
 			}
 		}

@@ -3,10 +3,10 @@ import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 export default function AdminConstrols() {
-    const [show, setShow] = useState(false);
+	const [show, setShow] = useState(false);
 
-		const handleClose = () => setShow(false);
-		const handleShow = () => setShow(true);
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 	return (
 		<>
 			<Navbar bg="secondary" expand="xxl" className="mb-3 text-white container">

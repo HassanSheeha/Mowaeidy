@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { editUserMe } from "../store/reducer/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Alert, Form } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -70,13 +69,14 @@ export default function UserEditDetails() {
 		console.log(editedUser);
 	};
 	return (
-		<div className="bg-light mt-5">
+		<div className="bg-light">
 			<Form className="p-5 text-dark" onSubmit={handleSubmit(onSubmit)}>
 				<div className="container border rounded-5 border-2 border-dark">
 					<div className="row p-3 pb-0 d-flex w-100 justify-content-between">
 						<div className="col-lg-3 col-md-5 col-8">
 							<img
 								src={state?.profilePicture}
+								alt="profile"
 								width="180"
 								height="180"
 								className="border border-warning rounded-circle shadow"

@@ -11,7 +11,6 @@ import MainAppointment from "../components/MainAppointment";
 import Industry from "../components/Industry";
 import Subscribe from "../components/Subscribe";
 import MainBlog from "../components/MainBlog";
-import Devider from "../components/Devider";
 
 export default function HomePage() {
 	return (
@@ -29,10 +28,6 @@ export default function HomePage() {
 			{/* not yet */}
 			<Industry></Industry>
 			<br></br>
-			<Devider></Devider>
-			<br></br>
-			<br></br>
-			<Devider></Devider>
 			<br></br>
 			<Subscribe></Subscribe>
 		</>

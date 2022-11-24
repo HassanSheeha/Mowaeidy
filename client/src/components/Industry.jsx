@@ -7,16 +7,10 @@ let slides = [
 	<img src="Assets/Images/4.jpg" alt="3" />,
 ];
 
-
-
 export default function Industry() {
 	return (
 		<>
-			<Carousel
-				slides={slides}
-				autoplay={true}
-				interval={2000}
-			/>
+			<Carousel slides={slides} autoplay={true} interval={2000} />
 		</>
 	);
 }

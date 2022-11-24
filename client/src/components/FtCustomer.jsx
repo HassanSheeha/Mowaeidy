@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "../css/FtSections.css";
 
-
 export default function FtCustomer() {
 	return (
 		<>
@@ -20,9 +19,7 @@ export default function FtCustomer() {
 						md={6}
 						className="d-flex flex-column justify-content-center align-items-center"
 					>
-						<h2 className="text-primary text-bold">
-							Customer Management
-						</h2>
+						<h2 className="text-primary text-bold">Customer Management</h2>
 						<p className="text-center lead w-75 text-muted text-bold mt-3">
 							The main goal of Customer relationship management is to create a
 							strong bond between customers and the company. To provide tools
