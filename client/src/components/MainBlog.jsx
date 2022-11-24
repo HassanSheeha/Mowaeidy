@@ -6,7 +6,7 @@ import { getBlogs } from "../store/reducer/BlogSlice";
 import Devider from "./Devider";
 
 export default function MainBlog() {
-	const { blogs, isLoading, isError } = useSelector((state) => state.blogs);
+	const { blogs } = useSelector((state) => state.blogs);
 	const dispatch = useDispatch();
 
 	useEffect(() => {

@@ -8,7 +8,7 @@ export default function AdminsData() {
 	const [admins, setAdmins] = useState([]);
 	const [msg, setMsg] = useState([]);
 	const { getAdmins, delAdmin } = adminsAPI;
-// functions to handle data
+	// functions to handle data
 	const getAllAdmins = async () => {
 		try {
 			const res = await getAdmins();
@@ -25,8 +25,8 @@ export default function AdminsData() {
 			console.log(error);
 		}
 	};
-  
-  // loading data
+
+	// loading data
 	useEffect(() => {
 		getAllAdmins();
 		// eslint-disable-next-line
@@ -39,14 +39,11 @@ export default function AdminsData() {
 			</div>
 			{/* Add button */}
 			<div className="container d-flex justify-content-end ">
-				<a
-					className="btn border-0 p-0"
-					href="admins/add"
-				>
+				<a className="btn border-0 p-0" href="admins/add">
 					<MdPersonAddAlt className="fs-4 text-info" />
 				</a>
 			</div>
-      <Outlet/>
+			<Outlet />
 			{/* Table */}
 			<Table
 				className="container mt-3 text-center"

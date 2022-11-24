@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
 import FullCalendar from "@fullcalendar/react";
 import daygridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -50,22 +49,23 @@ export default function OrgPersonalCalender({ organizer }) {
 	// show current organizer event
 	const setOrgAppointments = () => {
 		let appColor;
+		// eslint-disable-next-line
 		appointments?.map((oneApp) => {
-			if (oneApp?.status == "pending") {
-				appColor="yellow"
-			}else if (oneApp?.status == "confirmed") {
+			if (oneApp?.status === "pending") {
+				appColor = "yellow";
+			} else if (oneApp?.status === "confirmed") {
 				appColor = "green";
 			}
-				setOrganizerEvents((organizerEvents) => [
-					...organizerEvents,
-					{
-						start: oneApp?.appStartDateTime,
-						end: oneApp?.appEndDateTime,
-						backgroundColor: appColor,
-						title: oneApp?.madeByFK?.lastName,
-						id: oneApp?.appID,
-					},
-				]);
+			setOrganizerEvents((organizerEvents) => [
+				...organizerEvents,
+				{
+					start: oneApp?.appStartDateTime,
+					end: oneApp?.appEndDateTime,
+					backgroundColor: appColor,
+					title: oneApp?.madeByFK?.lastName,
+					id: oneApp?.appID,
+				},
+			]);
 		});
 	};
 

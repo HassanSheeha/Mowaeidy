@@ -24,21 +24,21 @@ export default function SideOrg({ orgData, children }) {
 	const [showDesc, setShowDesc] = useState(
 		<Card.Text>
 			<span className={`${classes.truncate}`}>{description}</span>
-			<button  className="btn p-0 text-light" onClick={readMore}>
+			<button className="btn p-0 text-light" onClick={readMore}>
 				Read more
 			</button>
 		</Card.Text>
 	);
 	let ratedTag = false;
-	if (rate>9) {
+	if (rate > 9) {
 		ratedTag = 10;
-	} else if (rate>8) {
+	} else if (rate > 8) {
 		ratedTag = 9;
-	} else if (rate>7) {
+	} else if (rate > 7) {
 		ratedTag = 8;
-	} else if (rate>6) {
+	} else if (rate > 6) {
 		ratedTag = 7;
-	} else if (rate>5) {
+	} else if (rate > 5) {
 		ratedTag = 6;
 	}
 	let activeTag = numbOfAppointments >= 30 ? true : false;
@@ -52,7 +52,9 @@ export default function SideOrg({ orgData, children }) {
 					src={userIDFK?.profilePicture}
 				/>
 				{children}
-				<Card.Body className={`${classes.sideCardBody} d-flex flex-column justify-content-between`}>
+				<Card.Body
+					className={`${classes.sideCardBody} d-flex flex-column justify-content-between`}
+				>
 					<Card.Title className="text-warning text-center">
 						{orgName}
 						<div className="fs-6 fw-normal text-white">{title}</div>
@@ -61,14 +63,22 @@ export default function SideOrg({ orgData, children }) {
 						{ratedTag && (
 							<span className="text-warning">
 								<FaStar></FaStar>
-								<FaStar style={{left:"20px"}}></FaStar>
-								<FaStar style={{left:"40px"}}></FaStar>
-								{ratedTag>7 && <FaStar style={{left:"60px"}}></FaStar>}
-								{ratedTag===7 && <FaStarHalfAlt style={{left:"60px"}}></FaStarHalfAlt>}
-								{ratedTag<7 && <FaRegStar style={{left:"60px"}}></FaRegStar>}
-								{ratedTag>9 && <FaStar style={{left:"80px"}}></FaStar>}
-								{ratedTag===9 && <FaStarHalfAlt style={{left:"80px"}}></FaStarHalfAlt>}
-								{ratedTag<9 && <FaRegStar style={{left:"80px"}}></FaRegStar>}
+								<FaStar style={{ left: "20px" }}></FaStar>
+								<FaStar style={{ left: "40px" }}></FaStar>
+								{ratedTag > 7 && <FaStar style={{ left: "60px" }}></FaStar>}
+								{ratedTag === 7 && (
+									<FaStarHalfAlt style={{ left: "60px" }}></FaStarHalfAlt>
+								)}
+								{ratedTag < 7 && (
+									<FaRegStar style={{ left: "60px" }}></FaRegStar>
+								)}
+								{ratedTag > 9 && <FaStar style={{ left: "80px" }}></FaStar>}
+								{ratedTag === 9 && (
+									<FaStarHalfAlt style={{ left: "80px" }}></FaStarHalfAlt>
+								)}
+								{ratedTag < 9 && (
+									<FaRegStar style={{ left: "80px" }}></FaRegStar>
+								)}
 							</span>
 						)}
 						{activeTag && (

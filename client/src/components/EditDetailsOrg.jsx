@@ -3,7 +3,6 @@ import { editOrganizerMe } from "../store/reducer/orgSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Alert, Col, Form, Row } from "react-bootstrap";
-import { FaEdit } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { organizerAPI } from "../API/AuthenticationAPI";
 
@@ -53,6 +52,7 @@ export default function EditDetails() {
 	const [friChecked, setFriChecked] = useState(false);
 
 	const checkedDays = () => {
+		// eslint-disable-next-line
 		state?.availDays?.map((day) => {
 			switch (day) {
 				case 0:
@@ -145,6 +145,7 @@ export default function EditDetails() {
 	const industryHandler = (e) => {
 		let selectedIndustry = e.target.value;
 		setIndustryIDFK(selectedIndustry);
+		// eslint-disable-next-line
 		industries.map((industry) => {
 			if (industry._id === selectedIndustry) {
 				setAllowPayment(industry.allowPayment);
@@ -193,14 +194,13 @@ export default function EditDetails() {
 		}
 		if (availDays.length !== 0) {
 			add(editedOrganizer);
-			console.log(editedOrganizer);
-		} else {
 		}
 	};
 
 	useEffect(() => {
 		getAllIndustries();
 		checkedDays();
+		// eslint-disable-next-line
 	}, [state]);
 	///
 
@@ -233,6 +233,7 @@ export default function EditDetails() {
 								src={state?.userIDFK?.profilePicture}
 								width="180"
 								height="180"
+								alt="profile"
 								className="border border-warning rounded-circle shadow"
 							/>
 						</div>

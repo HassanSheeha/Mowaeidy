@@ -15,7 +15,7 @@ import {
 import UserAppointDetails from "./appointDetailsUser";
 
 export default function UserProfileDetails() {
-	const { user, isDone,isLoading, error } = useSelector(
+	const { user, isDone, isLoading, error } = useSelector(
 		(state) => state.userReducer
 	);
 	const dispatch = useDispatch();
@@ -47,6 +47,7 @@ export default function UserProfileDetails() {
 						<div className="col-lg-3 col-md-4 col-7">
 							<img
 								src={user?.profilePicture}
+								alt="profile"
 								width="180"
 								height="180"
 								className="border border-warning rounded-circle shadow"
@@ -123,6 +124,7 @@ export default function UserProfileDetails() {
 											<FaEnvelope className="mx-3" />
 											<a
 												className="text-white fs-6"
+												rel="noreferrer"
 												target="_blank"
 												href={`mailto:${user.email}`}
 											>
@@ -137,6 +139,7 @@ export default function UserProfileDetails() {
 											<FaPhoneSquareAlt className="mx-3" />
 											<a
 												className="text-white fs-6"
+												rel="noreferrer"
 												target="_blank"
 												href={`tel:+${user.phone}`}
 											>

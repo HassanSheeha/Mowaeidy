@@ -28,7 +28,6 @@ export default function AddAppointment() {
 		group: false,
 		answer: "",
 	});
-	const { copassword, ...newAdmin } = newAppointment;
 	const [err, setErr] = useState({
 		description: null,
 		answer: null,

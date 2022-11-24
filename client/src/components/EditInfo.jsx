@@ -111,7 +111,7 @@ export default function EditInfo() {
 					});
 				}
 				break;
-			case "socialMediaLinks.facebook":
+			case "facebook":
 				if (e.target.value.length <= 0) {
 					setErr({
 						...err,
@@ -131,7 +131,7 @@ export default function EditInfo() {
 					});
 				}
 				break;
-			case "socialMediaLinks.linkedin":
+			case "linkedin":
 				if (e.target.value.length <= 0) {
 					setErr({
 						...err,
@@ -362,7 +362,7 @@ export default function EditInfo() {
 	};
 	const edit = async () => {
 		try {
-			let res = await editInfo(information._id, information);
+			let res = await editInfo(infos[0]?._id, information);
 			if (res.data.message === "data updated") {
 				setMsg("info edited");
 				setAlert(true);
@@ -448,9 +448,9 @@ export default function EditInfo() {
 						<Form.Control
 							onChange={changeHandler}
 							type="text"
-							name="socialMediaLinks.facebook"
+							name="facebook"
 							placeholder="Facebook Link"
-							defaultValue={infos[0]?.socialMediaLinks.facebook}
+							defaultValue={infos[0]?.socialMediaLinks?.facebook}
 						/>
 						{err.facebook && (
 							<Form.Text className="text-danger">{err.facebook}</Form.Text>
@@ -463,7 +463,7 @@ export default function EditInfo() {
 						<Form.Control
 							onChange={changeHandler}
 							type="text"
-							name="socialMediaLinks.linkedin"
+							name="linkedin"
 							placeholder="Linkedin Link"
 							defaultValue={infos[0]?.socialMediaLinks.linkedin}
 						/>

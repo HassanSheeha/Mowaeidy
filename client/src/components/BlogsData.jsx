@@ -76,7 +76,7 @@ export default function BlogsData() {
 							return (
 								<tr key={index} className="">
 									<td>{blog?.blogHeader}</td>
-									<td >{blog?.blogBody?.slice(0, 200)}</td>
+									<td>{blog?.blogBody?.slice(0, 200)}</td>
 									<td>
 										{blog?.blogDate.slice(0, blog?.blogDate.indexOf("T"))}
 									</td>

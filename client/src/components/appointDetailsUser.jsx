@@ -6,7 +6,7 @@ import {
 	getAllAppointmentsUser,
 	deleteAppointmentUser,
 } from "../store/reducer/appointSlice";
-import { Alert, Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 import {
 	FaFacebookSquare,
 	FaLinkedin,
@@ -16,9 +16,7 @@ import {
 } from "react-icons/fa";
 
 export default function UserAppointDetails({ user }) {
-	const { appointments, isLoading, error } = useSelector(
-		(state) => state.appointReducer
-	);
+	const { appointments } = useSelector((state) => state.appointReducer);
 	const dispatch = useDispatch();
 	const [renderChanges, setRenderChanges] = useState(0); //just to rerender the changes by actions
 
@@ -44,10 +42,10 @@ export default function UserAppointDetails({ user }) {
 		"Pending Appointments First",
 		"Confirmed Appointments First",
 	];
-	const dropdownFilters = appointFilters.map((filter) => (
+	const dropdownFilters = appointFilters.map((filter, index) => (
 		<Dropdown.Item
 			as="button"
-			key={filter}
+			key={index}
 			onClick={() => filterHandler(filter)}
 		>
 			{filter}
@@ -113,7 +111,7 @@ export default function UserAppointDetails({ user }) {
 						{filteredAppointments.map((appoint, index) => (
 							<Accordion.Item
 								className="border border-primary"
-								key={appoint?.id}
+								key={index}
 								eventKey={index}
 							>
 								<Accordion.Header>
@@ -246,6 +244,7 @@ export default function UserAppointDetails({ user }) {
 													<FaEnvelope className="fs-5 ms-4 me-2 text-dark" />
 													<a
 														className="text-primary fw-bold fs-6 me-3"
+														rel="noreferrer"
 														target="_blank"
 														href={`mailto:${appoint?.madeToFK?.contact?.orgEmail}`}
 													>
@@ -260,6 +259,7 @@ export default function UserAppointDetails({ user }) {
 													<FaPhoneSquareAlt className="fs-5 ms-4 me-2 text-dark" />
 													<a
 														className="text-primary fw-bold fs-6 me-3"
+														rel="noreferrer"
 														target="_blank"
 														href={`tel:+${appoint?.madeToFK?.contact?.phone}`}
 													>
@@ -273,6 +273,7 @@ export default function UserAppointDetails({ user }) {
 													<a
 														className="text-primary fw-bold fs-6 me-3"
 														target="_blank"
+														rel="noreferrer"
 														href={`tel:+${appoint?.madeToFK?.contact?.anthorPhone}`}
 													>
 														{appoint?.madeToFK?.contact?.anthorPhone}
@@ -286,6 +287,7 @@ export default function UserAppointDetails({ user }) {
 													<FaFacebookSquare className="fs-5 ms-4 me-2 text-dark" />
 													<a
 														className="text-primary fw-bold fs-6 me-3"
+														rel="noreferrer"
 														target="_blank"
 														href={`${appoint?.madeToFK?.contact?.facebook}`}
 													>
@@ -298,6 +300,7 @@ export default function UserAppointDetails({ user }) {
 													<FaLinkedin className="fs-5 ms-4 me-2 text-dark" />
 													<a
 														className="text-primary fw-bold fs-6"
+														rel="noreferrer"
 														target="_blank"
 														href={`${appoint?.madeToFK?.contact?.linkedin}`}
 													>
