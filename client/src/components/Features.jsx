@@ -46,9 +46,9 @@ export default function Features() {
 		<>
 			<Container className="my-5 py-4">
 				<Row xs={1} md={2} lg={3}>
-					{features.map((ft) => {
+					{features.map((ft, index) => {
 						return (
-							<Col className="mb-3">
+							<Col key={index} className="mb-3">
 								<Card className="ft-card border-0">
 									<Card.Img
 										className="my-3 ft-card-img"

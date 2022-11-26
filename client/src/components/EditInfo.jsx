@@ -465,7 +465,7 @@ export default function EditInfo() {
 							type="text"
 							name="linkedin"
 							placeholder="Linkedin Link"
-							defaultValue={infos[0]?.socialMediaLinks.linkedin}
+							defaultValue={infos[0]?.socialMediaLinks?.linkedin}
 						/>
 						{err.linkedin && (
 							<Form.Text className="text-danger">{err.linkedin}</Form.Text>

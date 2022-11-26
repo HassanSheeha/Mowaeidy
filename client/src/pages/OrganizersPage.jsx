@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Dropdown, DropdownButton } from "react-bootstrap";
 import { getAllOrganizers, orgActions } from "../store/reducer/orgSlice";
@@ -50,14 +50,15 @@ export default function OrganizersPage() {
 	let searchedOrgs = organizers;
 	if (filteredOrgs.length === 0) {
 		searchedOrgs = organizers.filter(
-			(org) => org?.orgName?.toLowerCase().indexOf(searchInput) !== -1
+			(org) =>
+				org?.orgName?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
 		);
 	} else {
 		searchedOrgs = filteredOrgs.filter(
-			(org) => org?.orgName?.toLowerCase().indexOf(searchInput) !== -1
+			(org) =>
+				org?.orgName?.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
 		);
 	}
-	// console.log(searchedOrgs);
 
 	//----Showing details for organizer clicked on the side
 
@@ -70,7 +71,7 @@ export default function OrganizersPage() {
 			<p className="lead fs-3">No Organizers To Show</p>
 		) : (
 			searchedOrgs.map((org) => (
-				<SingleOrg key={org.id} orgData={org}>
+				<SingleOrg key={org._id} orgData={org}>
 					<button
 						className="p-0 m-0 border-0 bg-transparent stretched-link"
 						onClick={() => setShowSide(org)}
@@ -89,7 +90,7 @@ export default function OrganizersPage() {
 							className="form-control mx-start rounded-pill"
 							placeholder="Search Organizer Name ..."
 							onChange={searchHandler}
-							value={searchInput.toLowerCase()}
+							value={searchInput}
 						/>
 					</div>
 					<div className="col-md-2 my-4">
@@ -118,7 +119,17 @@ export default function OrganizersPage() {
 							</SideOrg>
 						)}
 					</div>
-					<div className="col-lg-9 col-12">{!error && finalOrgList}</div>
+					{!error && (
+						<div className="col-lg-9 col-12">
+							{finalOrgList.length === 0 ? (
+								<p className="text-warning text-center text-lg-start ms-lg-5 mb-5 pb-5 fs-1">
+									Organizer Not Found
+								</p>
+							) : (
+								finalOrgList
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 

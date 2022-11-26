@@ -71,7 +71,8 @@ export default function OrgViewCalneder({ organizer }) {
 					start: oneApp?.appStartDateTime,
 					end: oneApp?.appEndDateTime,
 					display: "background",
-					backgroundColor: "red",
+					title: "occupied",
+					backgroundColor: "gray",
 					id: oneApp?.appID,
 				},
 			]);

@@ -12,6 +12,7 @@ export default function RegisterUser() {
 	const { addNewUser } = userAPI;
 	const [msg, setMsg] = useState("");
 	const [alert, setAlert] = useState();
+	const [alertColor, setAlertColor] = useState();
 	const navigate = useNavigate();
 	const cities = [
 		"Alexandria",
@@ -49,10 +50,12 @@ export default function RegisterUser() {
 		try {
 			let res = await addNewUser(newUser);
 			if (res.data.message === "Email Exist") {
-				setMsg("Email Exist");
+				setMsg("Email Exists");
+				setAlertColor("danger");
 				setAlert(true);
 			} else if (res?.data?.message === "catch signUp error") {
 				setMsg("try again later");
+				setAlertColor("danger");
 				setAlert(true);
 			} else if (res?.data?.message === "userAdd sucessfully") {
 				const userId = res?.data?.savedUser?._id;
@@ -60,6 +63,7 @@ export default function RegisterUser() {
 				localStorage.setItem("token", res?.data?.token);
 				localStorage.setItem("userId", res?.data?.savedUser?._id);
 				setMsg("user added");
+				setAlertColor("success");
 				setAlert(true);
 				setTimeout(() => {
 					navigate("/signUpOrganizer", { state: { id: userId } });
@@ -99,15 +103,18 @@ export default function RegisterUser() {
 		try {
 			let res = await addNewUser(newUser);
 			if (res.data.message === "Email Exist") {
-				setMsg("Email Exist");
+				setMsg("Email Exists");
+				setAlertColor("danger")
 				setAlert(true);
 			} else if (res?.data?.message === "catch signUp error") {
 				setMsg("try again later");
+				setAlertColor("danger")
 				setAlert(true);
 			} else if (res?.data?.message === "userAdd sucessfully") {
 				localStorage.setItem("token", res?.data?.token);
 				localStorage.setItem("userId", res?.data?.savedUser?._id);
 				setMsg("user added");
+				setAlertColor("success");
 				setAlert(true);
 				setTimeout(() => {
 					navigate("/home");
@@ -410,7 +417,7 @@ export default function RegisterUser() {
 								{alert && (
 									<Alert
 										className="position-fixed text-center mx-3 bottom-0 start-0 w-25"
-										variant="success"
+										variant={alertColor}
 									>
 										{msg}
 									</Alert>

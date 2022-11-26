@@ -22,6 +22,8 @@ export default function RegisterOrganizer() {
 	const [allowPayment, setAllowPayment] = useState(false);
 	const [msg, setMsg] = useState("");
 	const [alert, setAlert] = useState();
+	const [alertColor, setAlertColor] = useState("success");
+
 
 	const [availHours, setAvailHours] = useState({
 		startTime: "",
@@ -56,14 +58,12 @@ export default function RegisterOrganizer() {
 		}
 	};
 	const orgEmailHandler = (e) => {
-		console.log(e.target.value);
 		if (e.target.value !== null) {
 			setContact({ ...contact, orgEmail: e.target.value });
 		}
 	};
 
 	const startTimeHandler = (e) => {
-		console.log(e.target.value);
 		if (e.target.value !== null) {
 			setAvailHours({ ...availHours, startTime: e.target.value });
 		}
@@ -114,9 +114,11 @@ export default function RegisterOrganizer() {
 			const res = await addNewOrganizer(newOrganizer);
 			if (res?.data?.message === "signUp error") {
 				setMsg("Something Wrong ");
+				setAlertColor("danger")
 				setAlert(true);
 			} else if (res?.data?.message === "orginzer added successfuly") {
 				setMsg("orginzer added successfuly welcome");
+				setAlertColor("success");
 				setAlert(true);
 				setTimeout(() => {
 					navigate("/home");
@@ -571,7 +573,7 @@ export default function RegisterOrganizer() {
 					{alert && (
 						<Alert
 							className="position-fixed text-center mx-3 bottom-0 start-0 w-25"
-							variant="success"
+							variant={alertColor}
 						>
 							{msg}
 						</Alert>

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { BiUser } from "react-icons/bi";
+import { TbDoorExit } from "react-icons/tb";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import Dropdown from "react-bootstrap/Dropdown";
 
 export default function NavBar() {
 	const { pathname } = useLocation();
@@ -103,50 +103,41 @@ export default function NavBar() {
 					</Navbar.Collapse>
 					<Navbar.Brand className="pt-0">
 						{localStorage.getItem("token") ? (
-							<Dropdown
-								menuVariant="primary"
-								title="profile"
-								id="navbarScrollingDropdown"
-							>
-								<Dropdown.Toggle
-									className="pointer text-white fs-6"
-									id="dropdown-basic"
-									as="a"
-								>
-									Profile
-								</Dropdown.Toggle>
-								<Dropdown.Menu className="bg-primary text-center">
-									{localStorage.getItem("userId") ? (
+							<>
+								{localStorage.getItem("userId") ? (
+									<NavLink
+										title="Profile"
+										className={({ isActive }) =>
+											isActive ? "fs-3 text-white" : "fs-4 text-warning"
+										}
+										to="/user/me"
+									>
+										<BiUser className="border text-center border-2 rounded border-warning" />
+									</NavLink>
+								) : (
+									localStorage.getItem("adm") && (
 										<NavLink
+											title="Admin Panel"
 											className={({ isActive }) =>
 												isActive ? "fs-3 text-white" : "fs-4 text-warning"
 											}
-											to="/user/me"
+											to="/adminpanel"
 										>
 											<BiUser className="border text-center border-2 rounded border-warning" />
 										</NavLink>
-									) : (
-										localStorage.getItem("adm") && (
-											<NavLink
-												className={({ isActive }) =>
-													isActive ? "fs-3 text-white" : "fs-4 text-warning"
-												}
-												to="/adminpanel"
-											>
-												<BiUser className="border text-center border-2 rounded border-warning" />
-											</NavLink>
-										)
-									)}
-									<h6
-										className="fs-6 mx-4 mt-1 text-white pointer"
-										onClick={logout}
-									>
-										Logout
-									</h6>
-								</Dropdown.Menu>
-							</Dropdown>
+									)
+								)}
+								<NavLink
+									className="ms-1 fs-4 text-warning"
+									title="logout"
+									to="/home"
+								>
+									<TbDoorExit onClick={logout} className="" />
+								</NavLink>
+							</>
 						) : (
 							<NavLink
+								title="Login"
 								className={({ isActive }) =>
 									isActive ? "fs-2 text-white" : "fs-3 text-warning"
 								}

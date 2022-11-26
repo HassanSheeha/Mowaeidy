@@ -40,20 +40,19 @@ export default function UsersData() {
 			<Table
 				responsive
 				className="container mt-3 text-center"
-				striped
 				bordered
 				hover
-				variant="dark"
+				variant="secondary"
 			>
 				<thead>
-					<tr>
+					<tr className="align-middle">
 						{/* <th>ID</th> */}
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Email</th>
 						<th>City</th>
 						<th>Phone</th>
-						<th>Date of birth</th>
+						<th>DoB</th>
 						<th>Is Organier</th>
 						<th>commited</th>
 						<th>Appointments</th>
