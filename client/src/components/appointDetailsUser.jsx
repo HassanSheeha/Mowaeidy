@@ -69,11 +69,13 @@ export default function UserAppointDetails({ user }) {
 	);
 	if (filterName === "Closer Date First") {
 		filteredAppointments.sort((a, b) => {
-			return a.id - b.id;
+			if (a.appStartDateTime < b.appStartDateTime) return -1;
+			return 1;
 		});
 	} else if (filterName === "Closer Date Last") {
 		filteredAppointments.sort((a, b) => {
-			return b.id - a.id;
+			if (a.appStartDateTime > b.appStartDateTime) return -1;
+			return 1;
 		});
 	} else if (filterName === "Pending Appointments First") {
 		filteredAppointments = pendingAppointments.concat(confirmedAppointments);

@@ -67,7 +67,7 @@ export default function InfoData() {
 							type="text"
 							name="socialMediaLinks.facebook"
 							placeholder="Facebook Link"
-							defaultValue={infos[0]?.socialMediaLinks.facebook}
+							defaultValue={infos[0]?.socialMediaLinks?.facebook}
 						/>
 					</Form.Group>
 					<Form.Label as={Col} sm="12" md="2" lg="1">
@@ -80,7 +80,7 @@ export default function InfoData() {
 							type="text"
 							name="socialMediaLinks.linkedin"
 							placeholder="Linkedin Link"
-							defaultValue={infos[0]?.socialMediaLinks.linkedin}
+							defaultValue={infos[0]?.socialMediaLinks?.linkedin}
 						/>
 					</Form.Group>
 				</Row>

@@ -46,11 +46,11 @@ export default function AdminsData() {
 			<Outlet />
 			{/* Table */}
 			<Table
+				responsive
 				className="container mt-3 text-center"
-				striped
 				bordered
 				hover
-				variant="dark"
+				variant="secondary"
 			>
 				<thead>
 					<tr>

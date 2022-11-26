@@ -12,7 +12,6 @@ const addNewUser = async (user) => {
 const loginUser = async (user) => {
 	try {
 		const res = await axios.post(`${baseUrl}/user/signIn`, user);
-		console.log(res);
 		return res;
 	} catch (e) {
 		console.log(e);

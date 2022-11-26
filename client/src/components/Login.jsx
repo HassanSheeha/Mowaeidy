@@ -11,6 +11,7 @@ export default function Login() {
 	const { loginUser } = userAPI;
 	const [msg, setMsg] = useState("");
 	const [alert, setAlert] = useState();
+	const [alertColor, setAlertColor] = useState("success");
 	const navigate = useNavigate();
 	const [check, setCheck] = useState();
 	const adminCheckHandler = (e) => {
@@ -26,12 +27,15 @@ export default function Login() {
 			let res = await loginUser(userexist);
 			if (res?.data?.message === "invalid acount") {
 				setMsg("invalid account");
+				setAlertColor("danger");
 				setAlert(true);
 			} else if (res?.data?.message === "sorry you email or pass is error") {
 				setMsg("invalid email or password");
+				setAlertColor("danger");
 				setAlert(true);
 			} else if (res?.data?.message === "user is panned please contact us") {
 				setMsg("user is panned please contact us");
+				setAlertColor("danger");
 				setAlert(true);
 				setTimeout(() => {
 					navigate("/contact");
@@ -42,6 +46,7 @@ export default function Login() {
 					? localStorage.setItem("userId", res?.data?.userId)
 					: localStorage.setItem("adm", res?.data?.adm);
 				setMsg("welcome");
+				setAlertColor("success");
 				setAlert(true);
 				setTimeout(() => {
 					navigate("/home");
@@ -149,7 +154,7 @@ export default function Login() {
 										Sign In
 									</button>
 									<p className=" check1 mt-3">
-										Sign up as an
+										Sign in as an
 										<span className="check">Admin</span> ?
 										<input
 											className="mx-2"
@@ -162,7 +167,7 @@ export default function Login() {
 								{alert && (
 									<Alert
 										className="position-fixed text-center mx-3 bottom-0 start-0 w-25"
-										variant="success"
+										variant={alertColor}
 									>
 										{msg}
 									</Alert>

@@ -10,9 +10,7 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import { FaPhoneSquareAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function OrgAppointDetails({ organizer }) {
-	const { appointments } = useSelector(
-		(state) => state.appointReducer
-	);
+	const { appointments } = useSelector((state) => state.appointReducer);
 	const dispatch = useDispatch();
 
 	const [renderChanges, setRenderChanges] = useState(0); //just to rerender the changes by actions
@@ -75,11 +73,13 @@ export default function OrgAppointDetails({ organizer }) {
 	);
 	if (filterName === "Closer Date First") {
 		filteredAppointments.sort((a, b) => {
-			return a.id - b.id;
+			if (a.appStartDateTime < b.appStartDateTime) return -1;
+			return 1;
 		});
 	} else if (filterName === "Closer Date Last") {
 		filteredAppointments.sort((a, b) => {
-			return b.id - a.id;
+			if (a.appStartDateTime > b.appStartDateTime) return -1;
+			return 1;
 		});
 	} else if (filterName === "Pending Appointments First") {
 		filteredAppointments = pendingAppointments.concat(confirmedAppointments);
